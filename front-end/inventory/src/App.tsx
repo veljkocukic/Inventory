@@ -1,9 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import { Home } from './views';
-import { Error } from './views/Error';
-import { Login } from './views/Login';
-import { SharedLayout } from './views/SharedLayout';
+import {SharedLayout, Home, Login, Error} from './views'
 
 function App() {
   return (
