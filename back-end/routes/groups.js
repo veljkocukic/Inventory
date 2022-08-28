@@ -26,17 +26,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const singleGropu = await Group.findById(req.params.id);
-    res.status(200).send(singleGropu);
-  } catch (error) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/:id', async (req, res) => {
-  try {
-    const singleGropu = await Group.findById(req.params.id);
-    res.status(200).send(singleGropu);
+    const singleGroup = await Group.findById(req.params.id);
+    res.status(200).send(singleGroup);
   } catch (error) {
     res.status(500).json(err);
   }

@@ -2,9 +2,9 @@ const router = require('express').Router();
 const Group = require('../models/Group');
 const Item = require('../models/Item');
 
-router.post('/:id/add', async (req, res) => {
+router.post('/:groupId/add', async (req, res) => {
   try {
-    const itemGroup = await Group.findById(req.params.id);
+    const itemGroup = await Group.findById(req.params.groupId);
     const response = await itemGroup.updateOne({
       $push: { items: req.body.item },
     });
