@@ -4,19 +4,15 @@ let cors = require('cors');
 let mongoose = require('mongoose');
 require('dotenv').config();
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
-app.use(
-  express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 })
-);
-let { router } = require('./Rute/Rute');
+app.use(express.json());
 
-app.use('/api/v1', router);
+const gropuRoute = require('./routes/groups');
 
 const connectDB = (pass) => {
   return mongoose.connect(
     'mongodb+srv://Veljko:' +
       pass +
-      '@cluster0.vsesy.mongodb.net/CarModule?retryWrites=true&w=majority',
+      '@cluster0.vsesy.mongodb.net/Inventory?retryWrites=true&w=majority',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -24,7 +20,9 @@ const connectDB = (pass) => {
   );
 };
 
-const PORT = 5000;
+app.use('/api/groups', gropuRoute);
+
+const PORT = 3001;
 
 const start = async () => {
   try {
@@ -36,4 +34,4 @@ const start = async () => {
     console.log(error);
   }
 };
-//start()
+start();
