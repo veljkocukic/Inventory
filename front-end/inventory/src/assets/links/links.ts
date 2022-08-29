@@ -12,13 +12,8 @@ export const routeLinks = [
     },
     {
         id:2,
-        title:'Folder',
-        path:'/folder-marketing',
-        list: [
-            { name: 'Marketing', path: '/folder-marketing' },
-            { name: 'Design', path: '/folder-design' },
-            { name: 'Logic', path: '/folder-logic' },
-          ],
+        title:'Groups',
+        path:'/groups',
         icon:folderIcons
     },
     {

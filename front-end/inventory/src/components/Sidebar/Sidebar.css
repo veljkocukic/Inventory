@@ -35,7 +35,7 @@ aside {
   width: 1.5rem;
   height: 1.5rem;
 }
-.sidebar-container h3 {
+.sidebar-container h2 {
   color: #f2f2f2;
 }
 .sidebar-container .user-profile {
@@ -47,8 +47,8 @@ aside {
   color: #f2f2f2;
 }
 .sidebar-container img {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
 }
 .sidebar-container .route-options {
@@ -56,7 +56,7 @@ aside {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   width: 70%;
 }
 .sidebar-container .link-container {
@@ -65,7 +65,7 @@ aside {
   align-items: center;
   flex-direction: row;
   gap: 1rem;
-  width: 7rem;
+  width: 8rem;
 }
 .sidebar-container .link {
   text-decoration: none;

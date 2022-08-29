@@ -5,8 +5,9 @@
 }
 .dashboard-container {
   position: fixed;
-  top: 0;
+  top: 0px;
   left: 15%;
+  padding: 1rem;
   background-color: $dash-backround;
   width: 100vw;
   height: 100vh;
