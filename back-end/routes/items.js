@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const Group = require('../models/Group');
 const Item = require('../models/Item');
+const auth = require('../middleware/auth');
 
-router.post('/:groupId/add', async (req, res) => {
+router.post('/:groupId/add', auth, async (req, res) => {
   try {
     const itemGroup = await Group.findById(req.params.groupId);
     const response = await itemGroup.updateOne({
@@ -14,7 +15,7 @@ router.post('/:groupId/add', async (req, res) => {
   }
 });
 
-router.get('/:groupId/:itemId', async (req, res) => {
+router.get('/:groupId/:itemId', auth, async (req, res) => {
   try {
     const item = await Group.findById(req.params.groupId)
       .select('items')

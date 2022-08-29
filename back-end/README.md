@@ -1,5 +1,34 @@
 # API Documentation
 
+## Auth
+
+### POST `/api/auth/register` REGISTRATION
+
+#### If validation is successfull, the response will be a token to be stored as a bearrer
+
+```
+{
+    username: String,       /required/ minimal length = 7
+    email: String,          /required/
+    password: String,       /required/ minimal length = 7
+    organizationName:String,
+    groups:Array
+
+}
+```
+
+### POST `/api/auth/login` LOGIN
+
+#### If validation is successfull, the response will be a token to be stored as a bearrer
+
+```
+{
+    email: String,          /required/
+    password: String,       /required/ minimal length = 7
+
+}
+```
+
 ## Groups
 
 ### POST `/api/gropus`

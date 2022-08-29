@@ -6,7 +6,9 @@ require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
-const gropuRoute = require('./routes/groups');
+const gropuRoutes = require('./routes/groups');
+const itemRoutes = require('./routes/items');
+const authRoutes = require('./routes/auth');
 
 const connectDB = (pass) => {
   return mongoose.connect(
@@ -20,7 +22,9 @@ const connectDB = (pass) => {
   );
 };
 
-app.use('/api/groups', gropuRoute);
+app.use('/api/groups', gropuRoutes);
+app.use('/api/items', itemRoutes);
+app.use('/api/auth', authRoutes);
 
 const PORT = 3001;
 
