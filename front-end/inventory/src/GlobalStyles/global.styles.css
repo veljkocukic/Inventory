@@ -4,11 +4,5 @@
   box-sizing: border-box;
   -ms-scroll-chaining: none;
       overscroll-behavior: none;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+  font-family: "Work Sans", sans-serif;
 }/*# sourceMappingURL=global.styles.css.map */

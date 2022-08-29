@@ -1,7 +1,7 @@
-@mixin FlexCenter($direction) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: $direction;
-    color: aqua;
+@mixin Flex($direction, $justifyContent, $alignItems, $gap) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  flex-direction: $direction;
+  gap: $gap;
 }

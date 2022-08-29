@@ -1,8 +1,9 @@
-@import './variables';
+@import './Variables/variables';
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     overscroll-behavior: none;
+    font-family: $font-family; 
 }

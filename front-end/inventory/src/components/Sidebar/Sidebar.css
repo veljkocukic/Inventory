@@ -1,4 +1,4 @@
-.sidebar-container {
+aside {
   position: fixed;
   top: 0;
   left: 0;
@@ -6,9 +6,74 @@
   background: linear-gradient(to top, #626b77, #636c78);
   width: 20%;
   z-index: 99;
+}
+
+.sidebar-container {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 75%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: aqua;
+  gap: 4rem;
+  margin: 3rem 0;
+}
+.sidebar-container .flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+}
+.sidebar-container .flex h4 {
+  color: #f2f2f2;
+}
+.sidebar-container .flex img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.sidebar-container h3 {
+  color: #f2f2f2;
+}
+.sidebar-container .user-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  color: #f2f2f2;
+}
+.sidebar-container img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+.sidebar-container .route-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  width: 70%;
+}
+.sidebar-container .link-container {
+  display: flex;
+  justify-content: "";
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  width: 7rem;
+}
+.sidebar-container .link {
+  text-decoration: none;
+  color: #a6abb2;
+}
+.sidebar-container .active {
+  color: #f2f2f2;
+}
+.sidebar-container .active * {
+  fill: #f2f2f2;
 }/*# sourceMappingURL=Sidebar.css.map */
