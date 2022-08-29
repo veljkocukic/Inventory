@@ -1,19 +1,8 @@
 @import './variables';
 
-@mixin FlexCenter($direction) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: $direction;
-}
-
-
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     overscroll-behavior: none;
-}
-body{
-    @include FlexCenter(row);
 }

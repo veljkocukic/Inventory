@@ -1,3 +1,13 @@
+@import '../../GlobalStyles/Variables/variables';
+@import '../../GlobalStyles/Mixins/mixins';
+
 .sidebar-container{
-   
+position: fixed;
+top: 0;
+left: 0;
+min-height: 100vh;
+background:linear-gradient(to top, $primary-dark-gray, $primary-gray );
+width: 20%;
+z-index: 99;
+@include FlexCenter(column);
 }
