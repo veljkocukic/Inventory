@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { SharedLayout, Home, Login, Error } from "./views";
-import { Favorites } from "./views/Favorites/Favorites";
+import { SharedLayout, Home, Login, Error, Favorites } from "./views";
 
 function App() {
   return (

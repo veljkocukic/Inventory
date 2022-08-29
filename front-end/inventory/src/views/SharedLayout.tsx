@@ -1,7 +1,7 @@
 import React from "react";
+import "../sass/main.scss";
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../../components/Sidebar/Sidebar";
-import "./layout.css";
+import { Sidebar } from "../components/Sidebar";
 
 export const SharedLayout = () => {
   return (

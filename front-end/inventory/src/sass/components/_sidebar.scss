@@ -1,0 +1,63 @@
+@use "../base";
+
+aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  background: linear-gradient(
+    to top,
+    base.$primary-dark-gray,
+    base.$primary-gray
+  );
+  width: 20%;
+  z-index: 99;
+}
+.sidebar-container {
+  user-select: none;
+  width: 75%;
+  @include base.Flex(column, center, center, 4rem);
+  margin: 3rem 0;
+  .flex {
+    @include base.Flex(row, center, center, 1rem);
+    h4 {
+      color: base.$dash-backround;
+    }
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  h2 {
+    color: base.$dash-backround;
+  }
+  .user-profile {
+    @include base.Flex(column, center, center, 1rem);
+    color: base.$dash-backround;
+  }
+
+  img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+  }
+  .route-options {
+    @include base.Flex(column, center, center, 2rem);
+    width: 70%;
+  }
+  .link-container {
+    @include base.Flex(row, "", center, 1rem);
+    width: 8rem;
+  }
+  .link {
+    text-decoration: none;
+    color: base.$secondary-gray;
+  }
+  .active {
+    color: base.$dash-backround;
+    * {
+      fill: base.$dash-backround;
+    }
+  }
+}

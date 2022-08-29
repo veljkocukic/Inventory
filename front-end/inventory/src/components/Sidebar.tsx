@@ -1,8 +1,8 @@
 import React from "react";
-import "./Sidebar.css";
-import logo from "../../assets/images/logo512.png";
-import user from "../../assets/images/user-img.png";
-import { routeLinks } from "../../assets/links/links";
+import "../sass/main.scss";
+import logo from "../assets/images/logo512.png";
+import user from "../assets/images/user-img.png";
+import { routeLinks } from "../assets/links/links";
 import { NavLink, useLocation } from "react-router-dom";
 
 export const Sidebar = () => {
