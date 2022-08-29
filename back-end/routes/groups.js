@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Group = require('../models/Group');
+const auth = require('../middleware/auth');
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   try {
     const newGroup = new Group({
       name: req.body.name,
@@ -15,7 +16,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const allGruops = await Group.find({});
     res.status(200).send(allGruops);
@@ -24,7 +25,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
   try {
     const singleGroup = await Group.findById(req.params.id);
     res.status(200).send(singleGroup);
