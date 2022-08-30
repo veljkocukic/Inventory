@@ -26,6 +26,16 @@ export const registerUser = createAsyncThunk('user/registerUser', async(user:IUs
     }
 })
 
+export const loginUser = createAsyncThunk('user/loginUser', async(user:IUser, thunkApi)=>{
+    try {
+        const resp = await customFetch.post('/auth/login', user)
+
+        return resp.data
+    } catch (error) {
+        return thunkApi.rejectWithValue(error)
+    }
+})
+
 const userSlice = createSlice({
     name:'user',
     initialState,
@@ -42,6 +52,19 @@ const userSlice = createSlice({
             setCookies('usrin', JSON.stringify(payload))
         },
         [registerUser.rejected.type]:(state)=>{
+            state.isLoading = false
+        },
+        [loginUser.pending.type]:(state)=>{
+            state.isLoading = true
+        },
+        [loginUser.fulfilled.type]:(state,{ payload })=>{
+            state.isLoading = false;
+            state.user = payload;
+            console.log(current(state))
+            removeCookies('usrin')
+            setCookies('usrin', JSON.stringify(payload))
+        },
+        [loginUser.rejected.type]:(state)=>{
             state.isLoading = false
         }
      }

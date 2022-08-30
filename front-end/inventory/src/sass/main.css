@@ -98,6 +98,71 @@ aside {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
+.btn {
+  position: relative;
+  display: inline-block;
+  margin: 15px;
+  padding: 6px 16px;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #636c78;
+  background: #ffffff;
+  border: 3px solid #a6abb2;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  -webkit-transition: ease-out 0.5s;
+  -moz-transition: ease-out 0.5s;
+}
+
+.btn.btn-border-1::after,
+.btn.btn-border-1::before {
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 0%;
+  visibility: hidden;
+}
+
+.btn.btn-border-1::after {
+  bottom: -3px;
+  right: -3px;
+  border-left: 3px solid #636c78;
+  border-bottom: 3px solid #636c78;
+  transition: width 0.1s ease 0.1s, height 0.1s ease, visibility 0s 0.2s;
+}
+
+.btn.btn-border-1::before {
+  top: -3px;
+  left: -3px;
+  border-top: 3px solid #636c78;
+  border-right: 3px solid #636c78;
+  transition: width 0.1s ease 0.3s, height 0.1s ease 0.2s, visibility 0s 0.4s;
+}
+
+.btn.btn-border-1:hover {
+  -webkit-animation: pulse 1s ease-out 0.4s;
+          animation: pulse 1s ease-out 0.4s;
+  color: #636c78;
+}
+
+.btn.btn-border-1:hover::after,
+.btn.btn-border-1:hover::before {
+  width: calc(100% + 3px);
+  height: calc(100% + 3px);
+  visibility: visible;
+  transition: width 0.1s ease 0.2s, height 0.1s ease 0.3s, visibility 0s 0.2s;
+}
+
+.btn.btn-border-1:hover::after {
+  transition: width 0.1s ease 0.2s, height 0.1s ease 0.3s, visibility 0s 0.2s;
+}
+
+.btn.btn-border-1:hover::before {
+  transition: width 0.1s ease, height 0.1s ease 0.1s;
+}
+
 * {
   padding: 0;
   margin: 0;

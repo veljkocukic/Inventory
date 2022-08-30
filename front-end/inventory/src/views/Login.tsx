@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
-import { IUser, registerUser } from "../feautures/user/userSlice";
+import { IUser, loginUser, registerUser } from "../feautures/user/userSlice";
 import "../sass/layouts/_login.scss";
 import { AppDispatch } from "../store";
 
@@ -10,6 +10,7 @@ export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((store: any) => store.user);
   const navigate = useNavigate();
+  const [isMember, setIsMember] = useState(true);
   const [inputValues, setInputValues] = useState<IUser>({
     username: "",
     email: "",
@@ -22,12 +23,22 @@ export const Login = () => {
       return { ...copy, [e.target.name]: e.target.value };
     });
   };
+  console.log(isMember);
 
-  const handleSubmit = () => {
-    if (!inputValues) return;
-    console.log(inputValues);
-    dispatch(registerUser(inputValues));
-    navigate("/");
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const { email, username, password } = inputValues;
+
+    if (!isMember) {
+      if (!email || !username || !password) return;
+      dispatch(registerUser(inputValues));
+
+      return;
+    }
+    if (!email || !password) return;
+
+    dispatch(loginUser(inputValues));
   };
 
   useEffect(() => {
@@ -37,10 +48,12 @@ export const Login = () => {
   }, [user]);
 
   return (
-    <div className="login-wrapper">
+    <div className={isMember ? "login-wrapper isMember" : "login-wrapper"}>
       <section className="login-card">
         <h2>Welcome to My Storage!</h2>
+
         <Input
+          className={isMember ? "no-opacity" : "opacity"}
           type="text"
           name="username"
           labelText="Username"
@@ -48,6 +61,7 @@ export const Login = () => {
           value={inputValues.username}
           onChange={handleChange}
         />
+
         <Input
           type="email"
           name="email"
@@ -64,8 +78,14 @@ export const Login = () => {
           value={inputValues.password}
           onChange={handleChange}
         />
-        <div className="btn-container">
-          <button onClick={handleSubmit}>Login</button>
+        <button className="btn btn-border-1" onClick={handleSubmit}>
+          {isMember ? "Sign in" : "Sign Up"}
+        </button>
+        <div className="not-memeber">
+          <span>{isMember ? "Not a member?" : "Already a member?"}</span>{" "}
+          <button onClick={() => setIsMember(!isMember)}>
+            {isMember ? "Register" : "Login"}
+          </button>
         </div>
       </section>
     </div>

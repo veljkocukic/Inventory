@@ -7,6 +7,7 @@ interface IInput {
   value: string;
   type: string;
   name: string;
+  className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -17,10 +18,10 @@ export const Input = ({
   type,
   onChange,
   name,
-}: //   onChange,
-IInput) => {
+  className,
+}: IInput) => {
   return (
-    <div className="input">
+    <div className={`input ${className}`}>
       <label htmlFor={labelText}>{labelText}</label>
       <input
         name={name}
