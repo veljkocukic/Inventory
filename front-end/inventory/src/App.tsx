@@ -6,8 +6,6 @@ import { ProtectedRoute } from "./views/ProtectedRoute";
 import { Settings } from "./views/Settings";
 
 function App() {
-  const [user, setUser] = useState<any>(false);
-
   return (
     <>
       <Router>
@@ -15,7 +13,7 @@ function App() {
           <Route
             path="/"
             element={
-              <ProtectedRoute user={user}>
+              <ProtectedRoute>
                 <SharedLayout />
               </ProtectedRoute>
             }
