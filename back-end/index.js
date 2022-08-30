@@ -3,13 +3,15 @@ let app = express();
 let cors = require('cors');
 let mongoose = require('mongoose');
 require('dotenv').config();
-app.use(cors());
-app.use(express.json());
 
 const gropuRoutes = require('./routes/groups');
 const itemRoutes = require('./routes/items');
 const authRoutes = require('./routes/auth');
+const swaggerUi = require('swagger-ui-express'),
+  swaggerDocument = require('./swagger.json');
 
+app.use(cors());
+app.use(express.json());
 const connectDB = (pass) => {
   return mongoose.connect(
     'mongodb+srv://Veljko:' +
@@ -22,11 +24,12 @@ const connectDB = (pass) => {
   );
 };
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/groups', gropuRoutes);
 app.use('/api/items', itemRoutes);
 app.use('/api/auth', authRoutes);
 
-const PORT = 3001;
+const PORT = 8000;
 
 const start = async () => {
   try {

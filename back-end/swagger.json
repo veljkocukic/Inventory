@@ -1,0 +1,184 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Inventory API Docs",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:8000",
+    "basePath": "/api",
+    "tags": [
+      {
+        "name": "Auth",
+        "description": "Registration and login"
+      },
+      {
+        "name": "Groups",
+        "description": "Gropus that conain items"
+      }
+    ],
+        "paths": {
+          "/auth/register": {
+            "post": {
+              "tags": ["Auth"],
+              "summary": "Register a new user",
+              "parameters": [
+                {
+                    "name": "user",
+                    "in": "body",
+                    "description": "User that we want to create",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/TokenResponse"
+                  }
+                }
+              }
+            }
+          },
+          "/auth/login": {
+            "post": {
+              "tags": ["Auth"],
+              "summary": "Login",
+              "parameters": [
+                {
+                    "name": "user",
+                    "in": "body",
+                    "description": "Login",
+                    "schema": {
+                      "$ref": "#/definitions/LoginSchema"
+                    }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/TokenResponse"
+                  }
+                }
+              }
+            }
+          },
+          "/groups": {
+            "post": {
+              "tags": ["Groups"],
+              "summary": "Creating a new group",
+              "parameters": [
+                {
+                    "name": "user",
+                    "in": "body",
+                    "description": "Creating group",
+                    "schema": {
+                      "$ref": "#/definitions/GroupsPostSchema"
+                    }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/GroupSingleResponse"
+                  }
+                }
+              }
+            },
+            "get": {
+                "tags": ["Groups"],
+                "summary": "Getting all gropus",
+                "responses": {
+                  "200": {
+                    "description": "OK",
+                    "schema": {
+                      "$ref": "#/definitions/GroupAllResponse"
+                    }
+                  }
+                }
+              }
+          }
+        },
+        "definitions": {
+          "User": {
+            "required": ["username", "email", "password"],
+            "properties": {
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "organizationName":{
+                  "type":"string"
+              },
+              "groups":{
+                  "type":"array"
+              }
+            }
+          },
+          "TokenResponse": {
+            "type": "string"
+          },
+          "Users": {
+            "type": "array",
+            "$ref": "#/definitions/User"
+          },
+          "LoginSchema":{
+            "required": [ "email", "password"],
+            "properties":{
+                "email":{
+                    "type":"string"
+                },
+                "password":{
+                "type":"string"
+            }
+            }
+          },
+          "GroupsPostSchema":{
+            "required": [ "name"],
+            "properties":{
+                "items":{
+                    "type":"array"
+                },
+                "name":{
+                "type":"string"
+            },
+            "maxItems":{
+                "type":"number"
+            }
+            }
+          },
+          "GroupSingleResponse":{
+              "properties":{
+                  "_id":{
+                      "type":"string"
+                  },
+                "items":{
+                    "type":"array"
+                },
+                "name":{
+                "type":"string"
+            },
+            "maxItems":{
+                "type":"number"
+            }
+              }
+          },
+          "GroupAllResponse":"array"
+        },
+      
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"]
+  }
