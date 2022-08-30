@@ -23,11 +23,11 @@ export const Sidebar = () => {
           {routeLinks.map((item) => {
             return (
               <div className="link-container" key={item.id}>
-                <span
+                <div
                   className={item.path === pathname ? "link active" : "link"}
                 >
                   {item.icon}
-                </span>
+                </div>
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "link active" : "link"

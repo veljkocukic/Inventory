@@ -1,0 +1,23 @@
+@use "../base";
+
+.input {
+  @include base.Flex(column, "", flex-start, 0.3rem);
+  width: 100%;
+  height: 2.5rem;
+  background-color: transparent;
+  input {
+    width: 100%;
+    height: 2rem;
+    padding: 1rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+  }
+  input:focus {
+    outline: 2px solid base.$primary-gray;
+    transition: all 0.1s ease-in;
+  }
+  label {
+    font-size: 0.8rem;
+  }
+}

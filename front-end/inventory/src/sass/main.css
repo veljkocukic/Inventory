@@ -47,8 +47,8 @@ aside {
   color: #f2f2f2;
 }
 .sidebar-container img {
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
 }
 .sidebar-container .route-options {
@@ -62,18 +62,47 @@ aside {
 .sidebar-container .link-container {
   display: flex;
   justify-content: "";
-  align-items: center;
+  align-items: "";
   flex-direction: row;
   gap: 1rem;
-  width: 8rem;
+  width: 100%;
 }
 .sidebar-container .link {
   text-decoration: none;
   color: #a6abb2;
+  transition: all 0.5s ease-in-out;
 }
 .sidebar-container .active {
   color: #f2f2f2;
+  transition: all 0.5s ease-in-out;
 }
 .sidebar-container .active * {
+  transition: all 0.5s ease-in-out;
   fill: #f2f2f2;
+}
+
+.layout-wrapper {
+  width: 100vw;
+}
+
+.dashboard-container {
+  position: fixed;
+  top: 0px;
+  left: 15%;
+  padding: 1rem;
+  background-color: #f2f2f2;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  border-radius: 45px 0px 0px 45px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -ms-scroll-chaining: none;
+      overscroll-behavior: none;
+  font-family: "Work Sans", sans-serif;
 }/*# sourceMappingURL=main.css.map */
