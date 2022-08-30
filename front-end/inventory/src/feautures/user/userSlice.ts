@@ -1,8 +1,11 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk, current } from "@reduxjs/toolkit";
 import customFetch from "../../utils/axios";
+import getCookies from "../../utils/cookies/getCookies";
+import removeCookies from "../../utils/cookies/RemoveCookies";
+import setCookies from "../../utils/cookies/setCookie";
 
 const initialState = {
-    user:null,
+    user:getCookies('usrin'),
     isLoading:false
 }
 
@@ -15,7 +18,7 @@ export interface IUser{
 export const registerUser = createAsyncThunk('user/registerUser', async(user:IUser,thunkApi)=>{
 
     try {
-        const resp = await customFetch.post('auth/register', user);
+        const resp = await customFetch.post('/auth/register', user);
 
         return resp.data
     } catch (error) {
@@ -31,8 +34,12 @@ const userSlice = createSlice({
         [registerUser.pending.type]:(state)=>{
             state.isLoading = true
         },
-        [registerUser.fulfilled.type]:(state)=>{
+        [registerUser.fulfilled.type]:(state,{ payload })=>{
             state.isLoading = false;
+            state.user = payload;
+            console.log(current(state))
+            removeCookies('usrin')
+            setCookies('usrin', JSON.stringify(payload))
         },
         [registerUser.rejected.type]:(state)=>{
             state.isLoading = false

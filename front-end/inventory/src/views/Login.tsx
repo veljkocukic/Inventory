@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 import { IUser, registerUser } from "../feautures/user/userSlice";
 import "../sass/layouts/_login.scss";
@@ -7,6 +8,8 @@ import { AppDispatch } from "../store";
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const { user } = useSelector((store: any) => store.user);
+  const navigate = useNavigate();
   const [inputValues, setInputValues] = useState<IUser>({
     username: "",
     email: "",
@@ -24,7 +27,14 @@ export const Login = () => {
     if (!inputValues) return;
     console.log(inputValues);
     dispatch(registerUser(inputValues));
+    navigate("/");
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <div className="login-wrapper">
