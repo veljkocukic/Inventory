@@ -13,6 +13,7 @@ export interface IUser{
     username:string
     email:string
     password:string
+    organizationName?:string
 }
 
 export const registerUser = createAsyncThunk('user/registerUser', async(user:IUser,thunkApi)=>{

@@ -5,29 +5,40 @@
   width: 100vw;
   height: 100vh;
 
+  .login-container {
+    @include base.Flex(row, center, "", "");
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3);
+
+    width: 60%;
+    height: 60%;
+    position: relative;
+  }
+  .absolute-background {
+    @include base.Flex(column, center, center, 2rem);
+
+    span {
+      font-size: 2rem;
+      color: base.$dash-backround;
+    }
+    background-color: base.$primary-gray;
+    position: absolute;
+    width: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    height: 100%;
+    transition: all 0.4s ease-in-out;
+  }
+  .isMember {
+    transform: translateX(50%);
+    transition: all 0.4s ease-in-out;
+  }
+
+  .register-card,
   .login-card {
     @include base.Flex(column, center, center, 2rem);
     padding: 3rem;
-    width: 30%;
+    width: 50%;
     background-color: base.$dash-backround;
-    height: 60%;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    .not-member {
-      @include base.Flex(row, center, center, 2rem);
-      button {
-        background: none !important;
-        color: inherit;
-        border: none;
-        padding: 0;
-        font: inherit;
-        cursor: pointer;
-        outline: inherit;
-      }
-    }
-    .no-opacity {
-      opacity: 0;
-      transition: all 1s ease-in-out;
-    }
+    height: 100%;
   }
 }
