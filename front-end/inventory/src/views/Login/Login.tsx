@@ -7,6 +7,7 @@ import { AppDispatch } from "../../store";
 import { Input } from "../../components/Input";
 import { LoginCard } from "./LoginCard";
 import { RegisterCard } from "./RegisterCard";
+import { Button } from "../../components/Button";
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -76,9 +77,11 @@ export const Login = () => {
           }
         >
           <span>{!isMember ? "Not a member?" : "Already a member?"}</span>{" "}
-          <button onClick={changeSlide}>
-            {!isMember ? "Register" : "Login"}
-          </button>
+          <Button
+            className="btn btn-border-1"
+            onClick={changeSlide}
+            text={!isMember ? "Register" : "Login"}
+          />
         </div>
         <RegisterCard
           inputValues={inputValues}
