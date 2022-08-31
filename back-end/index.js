@@ -9,6 +9,7 @@ const itemRoutes = require('./routes/items');
 const authRoutes = require('./routes/auth');
 const swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('./swagger.json');
+const { copyFile } = require('fs/promises');
 
 app.use(cors());
 app.use(express.json());
