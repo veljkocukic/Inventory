@@ -1,4 +1,8 @@
 @use "components/_sidebar.scss";
+@use "components/topbar.scss";
+@use "components/searchbox.scss";
+@use "components/iconbutton.scss";
+@use "components/custombutton.scss";
 @use "_base.scss";
 @use "layouts/layout";
 @use "layouts/dashboar";

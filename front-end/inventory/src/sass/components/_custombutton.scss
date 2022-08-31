@@ -1,0 +1,18 @@
+.custom-button{
+    width: max-content;
+    padding: 1rem;
+    height: 3rem;
+    color:white;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #8bb8a3;
+    transition: .3s ease;
+
+    &:hover{
+        background-color: #648777;
+    }
+}

@@ -1,0 +1,25 @@
+.icon-button{
+    width: 3rem;
+    height: 3rem;
+    border:1px solid #a6abb2;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s ease;
+
+    &:hover{
+        background-color: #a6abb2;
+
+        & svg{
+            fill:white;
+            stroke: white;
+        }
+    }
+
+    svg{
+        fill:#a6abb2;
+        stroke: #a6abb2;
+    }
+}

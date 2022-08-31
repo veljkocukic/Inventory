@@ -81,10 +81,6 @@ aside {
   fill: #f2f2f2;
 }
 
-.layout-wrapper {
-  width: 100vw;
-}
-
 .dashboard-container {
   position: fixed;
   top: 0px;
