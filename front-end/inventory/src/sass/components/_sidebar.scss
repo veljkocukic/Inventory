@@ -47,7 +47,7 @@ aside {
     width: 70%;
   }
   .link-container {
-    @include base.Flex(row, "", "", 1rem);
+    @include base.Flex(row, "", center, 1rem);
     width: 100%;
   }
   .link {
