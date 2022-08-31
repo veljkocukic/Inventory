@@ -16,7 +16,6 @@ export const LoginCard = ({
         type="email"
         name="email"
         labelText="Email"
-        placeholder="Enter email"
         value={inputValues.email}
         onChange={handleChange}
       />
@@ -24,7 +23,6 @@ export const LoginCard = ({
         type="password"
         name="password"
         labelText="Password"
-        placeholder="Enter password"
         value={inputValues.password}
         onChange={handleChange}
       />

@@ -16,7 +16,6 @@ export const RegisterCard = ({
         type="email"
         name="email"
         labelText="Email"
-        placeholder="Enter email"
         value={inputValues.email}
         onChange={handleChange}
       />
@@ -24,7 +23,6 @@ export const RegisterCard = ({
         type="password"
         name="password"
         labelText="Password"
-        placeholder="Enter password"
         value={inputValues.password}
         onChange={handleChange}
       />
@@ -32,7 +30,6 @@ export const RegisterCard = ({
         type="text"
         name="username"
         labelText="Username"
-        placeholder="Enter username"
         value={inputValues.username}
         onChange={handleChange}
       />
@@ -40,7 +37,6 @@ export const RegisterCard = ({
         type="text"
         name="organizationName"
         labelText="Organization name"
-        placeholder="Enter organization name"
         value={inputValues.organizationName}
         onChange={handleChange}
       />

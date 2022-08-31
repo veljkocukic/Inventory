@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "../sass/components/_inputs.scss";
 
 interface IInput {
   labelText: string;
-  placeholder: string;
   value: string;
   type: string;
   name: string;
@@ -13,24 +12,30 @@ interface IInput {
 
 export const Input = ({
   labelText,
-  placeholder,
   value,
   type,
   onChange,
   name,
   className,
 }: IInput) => {
+  const [focused, setFocused] = useState(false);
+
   return (
     <div className={`input ${className}`}>
-      <label className={value ? "label active" : "label"} htmlFor={labelText}>
+      <label
+        className={value || focused ? "label active" : "label"}
+        htmlFor={labelText}
+      >
         {labelText}
       </label>
       <input
+        autoComplete="off"
         name={name}
         type={type}
         value={value}
-        placeholder={placeholder}
         onChange={onChange}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
       />
     </div>
   );

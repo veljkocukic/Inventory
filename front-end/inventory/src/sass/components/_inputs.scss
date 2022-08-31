@@ -14,27 +14,27 @@
     border: none;
     border-radius: 5px;
   }
+
   .label {
     position: absolute;
-    top: 0%;
+    top: 30%;
     left: 0.5rem;
-    opacity: 0.6;
     border-radius: 2px;
-    transform: translateY(0%);
+    transform: translateY(40%);
     color: base.$primary-gray;
     font-size: 0.8rem;
     pointer-events: none;
     padding: 0 0.3rem;
-    opacity: 0;
-    transition: 400ms ease-in-out top, 400ms ease-in-out font-size,
-      400ms ease-in-out color;
+    transition: 0.6s ease-in-out top, 0.6s ease-in-out font-size,
+      0.6s ease-in-out color;
   }
+
   .active {
-    opacity: 1;
     transform: translateY(-20%);
     top: -20%;
-    transition: 400ms ease-in-out top, 400ms ease-in-out font-size,
-      400ms ease-in-out color;
+    font-size: 0.8rem;
+    transition: 0.6s ease-in-out top, 0.6s ease-in-out font-size,
+      0.6s ease-in-out color;
     font-weight: 500;
   }
 }
