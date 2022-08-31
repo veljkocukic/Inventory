@@ -74,14 +74,14 @@
       }
     },
     "/auth/:id": {
-      "post": {
+      "get": {
         "tags": ["Auth"],
         "summary": "Get single user",
         "parameters": [
           {
             "name": "user",
             "in": "body",
-            "description": "Login",
+            "description": "Get a single user by providing id as a param in url",
             "schema": {
               "type": "object",
               "properties": {
