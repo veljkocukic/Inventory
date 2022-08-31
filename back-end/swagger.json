@@ -73,6 +73,44 @@
         }
       }
     },
+    "/auth/:id": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Get single user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": "string",
+                "username": "string",
+                "email": "string",
+                "organizationName": "string",
+                "items": "array"
+              },
+              "example": {
+                "_id": "fi32ifh29fnf9j2380f832h",
+                "username": "veljko123",
+                "email": "veljkocukic@gmail.com",
+                "organizationName": "VeljkoOrg",
+                "items": "['r32r23f32ff','f32f2f3233','f32v343544g54']"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TokenResponse"
+            }
+          }
+        }
+      }
+    },
     "/groups": {
       "post": {
         "tags": ["Groups"],
