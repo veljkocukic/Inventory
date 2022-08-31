@@ -17,12 +17,12 @@
 
   .label {
     position: absolute;
-    top: 25%;
+    top: 35%;
     left: 0.5rem;
     border-radius: 2px;
     transform: translateY(40%);
     color: base.$primary-gray;
-    font-size: 0.9rem;
+    font-size: 1rem;
     pointer-events: none;
     padding: 0 0.3rem;
     transition: 0.2s ease top, 0.2s ease font-size, 0.2s ease color;
@@ -30,7 +30,7 @@
 
   .active {
     transform: translateY(-20%);
-    top: -20%;
+    top: -10%;
     font-size: 0.8rem;
     transition: 0.2s ease top, 0.2s ease font-size, 0.2s ease color;
     font-weight: 500;

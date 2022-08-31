@@ -1,3 +1,4 @@
+import { addUserLocalStorage } from './../../utils/localStorage';
 import { createSlice,createAsyncThunk, current } from "@reduxjs/toolkit";
 import customFetch from "../../utils/axios";
 import getCookies from "../../utils/cookies/getCookies";
@@ -5,8 +6,9 @@ import removeCookies from "../../utils/cookies/RemoveCookies";
 import setCookies from "../../utils/cookies/setCookie";
 
 const initialState = {
-    user:getCookies('usrin'),
-    isLoading:false
+    isLoading:false,
+    isUserLoading:false,
+   
 }
 
 export interface IUser{
@@ -37,6 +39,18 @@ export const loginUser = createAsyncThunk('user/loginUser', async(user:{email:st
     }
 })
 
+export const getUser = createAsyncThunk('/user/getUser', async(id:string,thunkApi)=>{
+    try {
+
+        const resp = await customFetch.get('/auth/' + id)
+
+        return resp.data
+        
+    } catch (error) {
+        
+    }
+})
+
 const userSlice = createSlice({
     name:'user',
     initialState,
@@ -47,10 +61,12 @@ const userSlice = createSlice({
         },
         [registerUser.fulfilled.type]:(state,{ payload })=>{
             state.isLoading = false;
-            state.user = payload;
-            console.log(current(state))
+
             removeCookies('usrin')
-            setCookies('usrin', JSON.stringify(payload))
+            setCookies('username', JSON.stringify(payload?.user?.username))
+            addUserLocalStorage(payload.user)
+
+            setCookies('usrin', JSON.stringify(payload.token))
         },
         [registerUser.rejected.type]:(state)=>{
             state.isLoading = false
@@ -60,13 +76,24 @@ const userSlice = createSlice({
         },
         [loginUser.fulfilled.type]:(state,{ payload })=>{
             state.isLoading = false;
-            state.user = payload;
-            console.log(current(state))
+            console.log(payload)
+            setCookies('username', JSON.stringify(payload?.user?.username))
+            addUserLocalStorage(payload.user)
+
             removeCookies('usrin')
-            setCookies('usrin', JSON.stringify(payload))
+            setCookies('usrin', JSON.stringify(payload.token))
         },
         [loginUser.rejected.type]:(state)=>{
             state.isLoading = false
+        },
+        [getUser.pending.type]:(state)=>{
+            state.isUserLoading = true
+        },
+        [getUser.fulfilled.type]:(state,{ payload })=>{
+            state.isUserLoading = false
+        },
+        [getUser.rejected.type]:(state)=>{
+            state.isUserLoading = false
         }
      }
 })

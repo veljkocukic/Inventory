@@ -8,10 +8,10 @@ import { Input } from "../../components/Input";
 import { LoginCard } from "./LoginCard";
 import { RegisterCard } from "./RegisterCard";
 import { Button } from "../../components/Button";
+import { getUserFromLocalStorage } from "../../utils/localStorage";
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { user } = useSelector((store: any) => store.user);
   const navigate = useNavigate();
   const [isMember, setIsMember] = useState(false);
   const [inputValues, setInputValues] = useState<IUser>({
@@ -50,12 +50,6 @@ export const Login = () => {
 
     dispatch(loginUser(loginValues));
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user]);
 
   const changeSlide = () => {
     setInputValues({

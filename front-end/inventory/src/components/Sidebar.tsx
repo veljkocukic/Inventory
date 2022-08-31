@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../sass/main.scss";
 import logo from "../assets/images/logo512.png";
 import userImg from "../assets/images/user-img.png";
 import { routeLinks } from "../assets/links/links";
 import { NavLink, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../store";
+import { getUser } from "../feautures/user/userSlice";
+import { getUserFromLocalStorage } from "../utils/localStorage";
 
 export const Sidebar = () => {
   const { pathname } = useLocation();
-  // const { user } = useSelector((store: any) => store.user);
+  const user = getUserFromLocalStorage();
 
   return (
     <aside>
@@ -19,7 +22,7 @@ export const Sidebar = () => {
         </div>
         <div className="user-profile">
           <img src={userImg} alt="logo" />
-          <h4>{"Jennifer Rass"}</h4>
+          <h4>{user.username}</h4>
         </div>
         <div className="route-options">
           {routeLinks.map((item) => {
