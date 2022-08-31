@@ -17,24 +17,22 @@
 
   .label {
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 0.5rem;
     border-radius: 2px;
     transform: translateY(40%);
     color: base.$primary-gray;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     pointer-events: none;
     padding: 0 0.3rem;
-    transition: 0.6s ease-in-out top, 0.6s ease-in-out font-size,
-      0.6s ease-in-out color;
+    transition: 0.2s ease top, 0.2s ease font-size, 0.2s ease color;
   }
 
   .active {
     transform: translateY(-20%);
     top: -20%;
     font-size: 0.8rem;
-    transition: 0.6s ease-in-out top, 0.6s ease-in-out font-size,
-      0.6s ease-in-out color;
+    transition: 0.2s ease top, 0.2s ease font-size, 0.2s ease color;
     font-weight: 500;
   }
 }
