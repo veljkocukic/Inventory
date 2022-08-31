@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Loading } from "./components/Loading";
 import { SharedLayout, Home, Login, Error, Favorites } from "./views";
 import { Groups } from "./views/Groups";
 import { ProtectedRoute } from "./views/ProtectedRoute";
@@ -8,6 +9,7 @@ import { Settings } from "./views/Settings";
 function App() {
   return (
     <>
+      <Loading />
       <Router>
         <Routes>
           <Route

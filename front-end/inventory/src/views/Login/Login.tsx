@@ -27,7 +27,6 @@ export const Login = () => {
       return { ...copy, [e.target.name]: e.target.value };
     });
   };
-  console.log(isMember);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
