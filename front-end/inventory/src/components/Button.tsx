@@ -3,7 +3,7 @@ import "../sass/components/_button.scss";
 
 interface IButton {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   className: string;
 }
 
