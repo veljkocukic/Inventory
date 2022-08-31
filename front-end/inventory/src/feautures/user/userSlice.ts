@@ -27,7 +27,7 @@ export const registerUser = createAsyncThunk('user/registerUser', async(user:IUs
     }
 })
 
-export const loginUser = createAsyncThunk('user/loginUser', async(user:IUser, thunkApi)=>{
+export const loginUser = createAsyncThunk('user/loginUser', async(user:{email:string,password:string}, thunkApi)=>{
     try {
         const resp = await customFetch.post('/auth/login', user)
 

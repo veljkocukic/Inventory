@@ -3,21 +3,38 @@
 .input {
   @include base.Flex(column, "", flex-start, 0.3rem);
   width: 100%;
-  height: 2.5rem;
-  background-color: transparent;
+  height: 2rem;
+  background-color: #ffffff;
+  position: relative;
+
   input {
     width: 100%;
-    height: 2rem;
     padding: 1rem;
     outline: none;
     border: none;
     border-radius: 5px;
   }
-  input:focus {
-    outline: 2px solid base.$primary-gray;
-    transition: all 0.1s ease-in;
-  }
-  label {
+  .label {
+    position: absolute;
+    top: 0%;
+    left: 0.5rem;
+    opacity: 0.6;
+    border-radius: 2px;
+    transform: translateY(0%);
+    color: base.$primary-gray;
     font-size: 0.8rem;
+    pointer-events: none;
+    padding: 0 0.3rem;
+    opacity: 0;
+    transition: 400ms ease-in-out top, 400ms ease-in-out font-size,
+      400ms ease-in-out color;
+  }
+  .active {
+    opacity: 1;
+    transform: translateY(-20%);
+    top: -20%;
+    transition: 400ms ease-in-out top, 400ms ease-in-out font-size,
+      400ms ease-in-out color;
+    font-weight: 500;
   }
 }

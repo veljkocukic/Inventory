@@ -41,7 +41,7 @@ export const RegisterCard = ({
         name="organizationName"
         labelText="Organization name"
         placeholder="Enter organization name"
-        value={inputValues.username}
+        value={inputValues.organizationName}
         onChange={handleChange}
       />
       <button className="btn btn-border-1" onClick={handleSubmit}>

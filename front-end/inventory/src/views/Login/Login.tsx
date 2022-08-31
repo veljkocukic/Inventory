@@ -12,7 +12,7 @@ export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((store: any) => store.user);
   const navigate = useNavigate();
-  const [isMember, setIsMember] = useState(true);
+  const [isMember, setIsMember] = useState(false);
   const [inputValues, setInputValues] = useState<IUser>({
     username: "",
     email: "",
@@ -33,15 +33,22 @@ export const Login = () => {
 
     const { email, username, password } = inputValues;
 
-    if (!isMember) {
+    if (isMember) {
       if (!email || !username || !password) return;
       dispatch(registerUser(inputValues));
+      setInputValues({
+        username: "",
+        email: "",
+        password: "",
+        organizationName: "",
+      });
 
       return;
     }
     if (!email || !password) return;
+    const loginValues = { email, password };
 
-    dispatch(loginUser(inputValues));
+    dispatch(loginUser(loginValues));
   };
 
   useEffect(() => {
@@ -49,6 +56,16 @@ export const Login = () => {
       navigate("/");
     }
   }, [user]);
+
+  const changeSlide = () => {
+    setInputValues({
+      username: "",
+      email: "",
+      password: "",
+      organizationName: "",
+    });
+    setIsMember(!isMember);
+  };
 
   return (
     <div className={"login-wrapper"}>
@@ -59,7 +76,7 @@ export const Login = () => {
           }
         >
           <span>{!isMember ? "Not a member?" : "Already a member?"}</span>{" "}
-          <button onClick={() => setIsMember(!isMember)}>
+          <button onClick={changeSlide}>
             {!isMember ? "Register" : "Login"}
           </button>
         </div>

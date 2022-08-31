@@ -22,7 +22,9 @@ export const Input = ({
 }: IInput) => {
   return (
     <div className={`input ${className}`}>
-      <label htmlFor={labelText}>{labelText}</label>
+      <label className={value ? "label active" : "label"} htmlFor={labelText}>
+        {labelText}
+      </label>
       <input
         name={name}
         type={type}
