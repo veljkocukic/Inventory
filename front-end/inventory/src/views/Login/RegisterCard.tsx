@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 
 export const RegisterCard = ({
@@ -40,9 +41,11 @@ export const RegisterCard = ({
         value={inputValues.organizationName}
         onChange={handleChange}
       />
-      <button className="btn btn-border-1" onClick={handleSubmit}>
-        Sign Up
-      </button>
+      <Button
+        className="btn btn-border-1"
+        onClick={handleSubmit}
+        text="Sign Up"
+      />
     </section>
   );
 };
