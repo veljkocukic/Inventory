@@ -45,16 +45,22 @@ router.post('/login', async (req, res) => {
     ) {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
-      !user && res.status(404).json('Wrong email');
-
+      if (!user) {
+        res.status(404).json('Wrong email');
+        return;
+      }
       const validPassword = await bcrypt.compare(password, user.password);
-      !validPassword && res.status(400).json('Wrong password');
+      if (!validPassword) {
+        res.status(400).json('Wrong password');
+        return;
+      }
       const token = jwt.sign({ id: user._id }, process.env.TOKEN_CODE);
       res.status(200).json(token);
     } else {
       res.status(400).send('Validation failed');
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
