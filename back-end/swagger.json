@@ -252,7 +252,27 @@
       }
     },
     "TokenResponse": {
-      "type": "string"
+      "type": "object",
+      "properties": {
+        "token": "string",
+        "user": {
+          "_id": "string",
+          "username": "string",
+          "email": "string",
+          "organizationName": "string",
+          "items": "array"
+        }
+      },
+      "example": {
+        "token": "2e2e02i339489448932y4328493yr28r3yr298yr39",
+        "user": {
+          "_id": "fi32ifh29fnf9j2380f832h",
+          "username": "veljko123",
+          "email": "veljkocukic@gmail.com",
+          "organizationName": "VeljkoOrg",
+          "items": "['r32r23f32ff','f32f2f3233','f32v343544g54']"
+        }
+      }
     },
     "Users": {
       "type": "array",

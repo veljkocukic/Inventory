@@ -23,9 +23,9 @@ router.post('/register', async (req, res) => {
         email,
       });
 
-      const response = await newUser.save();
-      const token = jwt.sign({ id: response._id }, process.env.TOKEN_CODE);
-      res.status(200).json(token);
+      const user = await newUser.save();
+      const token = jwt.sign({ id: user._id }, process.env.TOKEN_CODE);
+      res.status(200).json({ token, user });
     } else {
       res.status(400).send('Validation failed');
     }
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
         return;
       }
       const token = jwt.sign({ id: user._id }, process.env.TOKEN_CODE);
-      res.status(200).json(token);
+      res.status(200).json({ token, user });
     } else {
       res.status(400).send('Validation failed');
     }
