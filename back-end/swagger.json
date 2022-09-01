@@ -214,6 +214,59 @@
         }
       }
     },
+    "/groups/edit/:id": {
+      "patch": {
+        "tags": ["Groups"],
+        "summary": "Editing single group",
+        "parameters": [
+          {
+            "name": "group",
+            "in": "body",
+            "description": "Editing group",
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "items": {
+                "type": {
+                  "type": "array"
+                }
+              },
+              "maxItems": {
+                "type": "number"
+              }
+            },
+            "example": {
+              "_id": "fi32ifh29fnf9j2380f832h",
+              "items": "['r32r23f32ff','f32f2f3233','f32v343544g54']",
+              "maxItems": 18
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "items": {
+                  "type": {
+                    "type": "array"
+                  }
+                },
+                "maxItems": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/items/:groupId/add": {
       "post": {
         "tags": ["Items"],
@@ -298,7 +351,7 @@
           "username": "string",
           "email": "string",
           "organizationName": "string",
-          "items": "array"
+          "gropus": "array"
         }
       },
       "example": {
@@ -308,7 +361,7 @@
           "username": "veljko123",
           "email": "veljkocukic@gmail.com",
           "organizationName": "VeljkoOrg",
-          "items": "['r32r23f32ff','f32f2f3233','f32v343544g54']"
+          "groups": "['r32r23f32ff','f32f2f3233','f32v343544g54']"
         }
       }
     },
