@@ -17,11 +17,15 @@ router.post('/register', async (req, res) => {
       const { email, username, password } = req.body;
       const emailCheck = User.findOne({ email });
       const usernameCheck = User.findOne({ username });
+      let errors = [];
       if (emailCheck) {
-        res.status(400).json('Email already in use');
-        return;
-      } else if (usernameCheck) {
-        res.status(400).json('Username already in use');
+        errors.push({ email: 'Email already in use' });
+      }
+      if (usernameCheck) {
+        errors.push({ username: 'Username already in use' });
+      }
+      if (errors.length > 0) {
+        res.status(400).json(errors);
         return;
       }
       const salt = await bcrypt.genSalt(10);
@@ -54,14 +58,17 @@ router.post('/login', async (req, res) => {
       req.body.password.length >= 7
     ) {
       const { email, password } = req.body;
+      let errors = [];
       const user = await User.findOne({ email });
       if (!user) {
-        res.status(404).json('Wrong email');
-        return;
+        errors.push({ email: 'Wrong email' });
       }
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
-        res.status(400).json('Wrong password');
+        errors.push({ password: 'Wrong email' });
+      }
+      if (errors.length > 0) {
+        res.status(400).json(errors);
         return;
       }
       delete user.password;
