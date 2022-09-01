@@ -1,12 +1,16 @@
-import React, { FC, ReactElement, useState } from "react";
-import { Navigate } from "react-router-dom";
-import getCookies from "../utils/cookies/getCookies";
+import React, { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import getCookies from '../utils/cookies/getCookies';
 
 export const ProtectedRoute = ({ children }: any) => {
-  const user = getCookies("usrin");
+  const user = getCookies('usrin');
+  let forReturn = children;
 
-  if (!user) {
-    return <Navigate to="login" />;
-  }
-  return children;
+  useEffect(() => {
+    if (!user) {
+      forReturn = <Navigate to='login' />;
+    }
+  }, [user]);
+
+  return forReturn;
 };
