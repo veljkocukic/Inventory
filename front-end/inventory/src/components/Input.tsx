@@ -31,7 +31,7 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
         value={value}
         onChange={onChange}
         onFocus={() => {
-          !(name === "organizationName") && setFocused(true);
+          setFocused(true);
           regexGenerator(type, name, setValid, valid, setErrorMsg, value);
         }}
         onBlur={() => {

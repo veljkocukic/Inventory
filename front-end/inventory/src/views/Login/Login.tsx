@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const { errorMsgs } = useSelector((store: any) => store.user);
   const navigate = useNavigate();
   const [isMember, setIsMember] = useState(false);
   const [inputValues, setInputValues] = useState<IUser>({
@@ -19,6 +20,7 @@ export const Login = () => {
     password: "",
     organizationName: "",
   });
+  console.log(errorMsgs);
   const { userToken } = useSelector((store: any) => store.user);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValues((prev) => {
@@ -41,10 +43,10 @@ export const Login = () => {
 
       return;
     }
-    if (!email || !password) {
-      toast.warning("All fields are required");
-      return;
-    }
+    // if (!email || !password) {
+    //   toast.warning("All fields are required");
+    //   return;
+    // }
     const loginValues = { email, password };
 
     dispatch(loginUser(loginValues));

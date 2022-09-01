@@ -9,6 +9,7 @@ const initialState = {
     isLoading:false,
     isUserLoading:false,
     userToken:getCookies('usrin'),
+    errorMsgs:[]
 }
 
 export interface IUser{
@@ -80,8 +81,10 @@ const userSlice = createSlice({
             state.userToken = getCookies('usrin')
            
         },
-        [loginUser.rejected.type]:(state)=>{
+        [loginUser.rejected.type]:(state, {payload})=>{
             state.isLoading = false
+            state.errorMsgs = payload
+            console.log(payload)
         },
         [getUser.pending.type]:(state)=>{
             state.isUserLoading = true
