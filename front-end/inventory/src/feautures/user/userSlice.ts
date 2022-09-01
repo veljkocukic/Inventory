@@ -76,7 +76,6 @@ const userSlice = createSlice({
         },
         [loginUser.fulfilled.type]:(state,{ payload })=>{
             state.isLoading = false;
-            console.log(payload)
             setCookies('username', JSON.stringify(payload?.user?.username))
             addUserLocalStorage(payload.user)
 
