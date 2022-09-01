@@ -20,7 +20,9 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   console.log(errorMsgs[name]);
 
   return (
-    <div className={`input ${!valid && !focused && "invalid"}`}>
+    <div
+      className={`input ${(!valid && !focused) || (errorMsgs && "invalid")}`}
+    >
       <label
         className={value || focused ? "label active" : "label"}
         htmlFor={labelText}
