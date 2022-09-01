@@ -4,7 +4,6 @@
   @include base.Flex(column, "", flex-start, 0.3rem);
   width: 100%;
   height: 2rem;
-  background-color: #ffffff;
   position: relative;
 
   input {
@@ -13,9 +12,23 @@
     outline: none;
     border: none;
     border-radius: 5px;
+    z-index: 2;
+  }
+
+  @keyframes shake {
+    25% {
+      transform: translateX(4px);
+    }
+    50% {
+      transform: translateX(-4px);
+    }
+    75% {
+      transform: translateX(4px);
+    }
   }
 
   .label {
+    z-index: 999;
     position: absolute;
     top: 35%;
     left: 0.5rem;
@@ -35,4 +48,7 @@
     transition: 0.2s ease top, 0.2s ease font-size, 0.2s ease color;
     font-weight: 500;
   }
+}
+.invalid {
+  animation: shake 0.5s;
 }

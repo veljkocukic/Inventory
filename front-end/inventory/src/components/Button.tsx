@@ -5,11 +5,12 @@ interface IButton {
   text: string;
   onClick?: () => void;
   className: string;
+  onSubmit?: () => void;
 }
 
-export const Button = ({ text, onClick, className }: IButton) => {
+export const Button = ({ text, onClick, className, onSubmit }: IButton) => {
   return (
-    <div className={className} onClick={onClick}>
+    <div className={className} onClick={onClick} onSubmit={onSubmit}>
       {text}
     </div>
   );
