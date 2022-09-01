@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Group = require('../models/Group');
 const auth = require('../middleware/auth');
+const { response } = require('express');
 
 router.post('/', auth, async (req, res) => {
   try {
@@ -29,6 +30,22 @@ router.get('/:id', auth, async (req, res) => {
   try {
     const singleGroup = await Group.findById(req.params.id);
     res.status(200).send(singleGroup);
+  } catch (error) {
+    res.status(500).json(err);
+  }
+});
+
+router.patch('/edit/:id', auth, async (req, res) => {
+  const request = req.body;
+  delete request._id;
+  try {
+    await Group.findByIdAndUpdate({ _id: req.body._id }, { ...request })
+      .then((response) => {
+        res.status(200).send(response);
+      })
+      .catch((error) => {
+        res.status(500).json(error);
+      });
   } catch (error) {
     res.status(500).json(err);
   }
