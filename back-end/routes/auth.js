@@ -17,11 +17,11 @@ router.post('/register', async (req, res) => {
       const { email, username, password } = req.body;
       const emailCheck = User.findOne({ email });
       const usernameCheck = User.findOne({ username });
-      if (email) {
+      if (emailCheck) {
         res.status(400).json('Email already in use');
         return;
       } else if (usernameCheck) {
-        res.status(400).json('Email already in use');
+        res.status(400).json('Username already in use');
         return;
       }
       const salt = await bcrypt.genSalt(10);
@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
       const token = jwt.sign({ id: user._id }, process.env.TOKEN_CODE);
       res.status(200).json({ token, user });
     } else {
-      res.status(400).json('Validation failed');
+      res.status(400).send('Validation failed');
     }
   } catch (err) {
     console.log(err);
