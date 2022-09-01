@@ -14,6 +14,8 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   const [focused, setFocused] = useState(false);
   const [invalid, setInvalid] = useState<string | boolean>("s");
 
+  console.log(invalid);
+
   const regexGenerator = (type: string, name: string, value?: any) => {
     let pattern;
 
@@ -45,7 +47,7 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   };
 
   return (
-    <div className={`input ${!invalid && "invalid"}`}>
+    <div className={`input ${!invalid && !focused && "invalid"}`}>
       <label
         className={value || focused ? "label active" : "label"}
         htmlFor={labelText}
