@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "../sass/components/_inputs.scss";
 import { regexGenerator } from "../views/Login/loginFuncs";
 
@@ -15,6 +16,8 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   const [focused, setFocused] = useState(false);
   const [valid, setValid] = useState<string | boolean>("s");
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const { errorMsgs } = useSelector((store: any) => store.user);
+  console.log(errorMsgs[name]);
 
   return (
     <div className={`input ${!valid && !focused && "invalid"}`}>
@@ -41,7 +44,9 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
         }}
         // pattern={regexGenerator(type, name, value)}
       />
-      <p className={!valid ? "error-msg err" : "error-msg"}>{errorMsg}</p>
+      <p className={!valid || errorMsgs[name] ? "error-msg err" : "error-msg"}>
+        {errorMsgs[name] ? errorMsgs[name] : errorMsg}
+      </p>
     </div>
   );
 };

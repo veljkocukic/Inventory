@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import "../../sass/layouts/_login.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { IUser, loginUser, registerUser } from "../../feautures/user/userSlice";
+import {
+  clearErrors,
+  IUser,
+  loginUser,
+  registerUser,
+} from "../../feautures/user/userSlice";
 import { AppDispatch } from "../../store";
 import { LoginCard } from "./LoginCard";
 import { RegisterCard } from "./RegisterCard";
@@ -11,18 +16,19 @@ import { toast } from "react-toastify";
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { errorMsgs } = useSelector((store: any) => store.user);
   const navigate = useNavigate();
   const [isMember, setIsMember] = useState(false);
+
   const [inputValues, setInputValues] = useState<IUser>({
     username: "",
     email: "",
     password: "",
     organizationName: "",
   });
-  console.log(errorMsgs);
+
   const { userToken } = useSelector((store: any) => store.user);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(clearErrors());
     setInputValues((prev) => {
       const copy = { ...prev };
       return { ...copy, [e.target.name]: e.target.value };

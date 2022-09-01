@@ -9,7 +9,7 @@ const initialState = {
     isLoading:false,
     isUserLoading:false,
     userToken:getCookies('usrin'),
-    errorMsgs:[]
+    errorMsgs:{}
 }
 
 export interface IUser{
@@ -55,7 +55,12 @@ export const getUser = createAsyncThunk('/user/getUser', async(id:string,thunkAp
 const userSlice = createSlice({
     name:'user',
     initialState,
-     reducers:{},
+     reducers:{
+
+        clearErrors: (state) => {
+            state.errorMsgs = '';
+          },
+     },
      extraReducers:{
         [registerUser.pending.type]:(state)=>{
             state.isLoading = true
@@ -68,8 +73,10 @@ const userSlice = createSlice({
             state.userToken = getCookies('usrin')
 
         },
-        [registerUser.rejected.type]:(state)=>{
+        [registerUser.rejected.type]:(state, { payload })=>{
             state.isLoading = false
+            state.errorMsgs = payload.response.data
+            
         },
         [loginUser.pending.type]:(state)=>{
             state.isLoading = true
@@ -83,8 +90,9 @@ const userSlice = createSlice({
         },
         [loginUser.rejected.type]:(state, {payload})=>{
             state.isLoading = false
-            state.errorMsgs = payload
-            console.log(payload)
+            state.errorMsgs = payload.response.data
+
+            console.log(state.errorMsgs)
         },
         [getUser.pending.type]:(state)=>{
             state.isUserLoading = true
@@ -97,5 +105,8 @@ const userSlice = createSlice({
         }
      }
 })
+
+export const { clearErrors } = userSlice.actions;
+
 
 export default userSlice.reducer
