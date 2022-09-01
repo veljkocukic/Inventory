@@ -8,7 +8,7 @@ import setCookies from "../../utils/cookies/setCookie";
 const initialState = {
     isLoading:false,
     isUserLoading:false,
-   
+    userToken:getCookies('usrin'),
 }
 
 export interface IUser{
@@ -61,12 +61,11 @@ const userSlice = createSlice({
         },
         [registerUser.fulfilled.type]:(state,{ payload })=>{
             state.isLoading = false;
-
-            removeCookies('usrin')
-            setCookies('username', JSON.stringify(payload?.user?.username))
-            addUserLocalStorage(payload.user)
-
             setCookies('usrin', JSON.stringify(payload.token))
+
+            addUserLocalStorage(payload.user)
+            state.userToken = getCookies('usrin')
+
         },
         [registerUser.rejected.type]:(state)=>{
             state.isLoading = false
@@ -74,13 +73,12 @@ const userSlice = createSlice({
         [loginUser.pending.type]:(state)=>{
             state.isLoading = true
         },
-        [loginUser.fulfilled.type]:(state,{ payload })=>{
+        [loginUser.fulfilled.type]:(state:any,{ payload })=>{
             state.isLoading = false;
-            setCookies('username', JSON.stringify(payload?.user?.username))
+            setCookies('usrin', JSON.stringify(payload?.token))
             addUserLocalStorage(payload.user)
-
-            removeCookies('usrin')
-            setCookies('usrin', JSON.stringify(payload.token))
+            state.userToken = getCookies('usrin')
+           
         },
         [loginUser.rejected.type]:(state)=>{
             state.isLoading = false

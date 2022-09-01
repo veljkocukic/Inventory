@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-import getCookies from '../utils/cookies/getCookies';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export const ProtectedRoute = ({ children }: any) => {
-  const user = getCookies('usrin');
-  let forReturn = children;
+  const { userToken } = useSelector((store: any) => store.user);
 
-  useEffect(() => {
-    if (!user) {
-      forReturn = <Navigate to='login' />;
-    }
-  }, [user]);
-
-  return forReturn;
+  if (!userToken) {
+    return <Navigate to="login" />;
+  }
+  return children;
 };

@@ -36,7 +36,7 @@
 
   .register-card,
   .login-card {
-    @include base.Flex(column, center, center, 2rem);
+    @include base.Flex(column, center, center, 1.5rem);
     padding: 3rem;
     width: 50%;
     background-color: base.$dash-backround;

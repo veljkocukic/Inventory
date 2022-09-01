@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../sass/components/_inputs.scss";
+import { regexGenerator } from "../views/Login/loginFuncs";
 
 interface IInput {
   labelText: string;
@@ -12,42 +13,11 @@ interface IInput {
 
 export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   const [focused, setFocused] = useState(false);
-  const [invalid, setInvalid] = useState<string | boolean>("s");
-
-  console.log(invalid);
-
-  const regexGenerator = (type: string, name: string, value?: any) => {
-    let pattern;
-
-    if (type === "email") {
-      pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      setInvalid(pattern.test(value));
-
-      return pattern.test(value);
-    }
-    if (name === "username" && type === "text") {
-      pattern = /[a-z]{7,15}/;
-      setInvalid(pattern.test(value));
-
-      return pattern.test(value);
-    }
-    if (type === "password") {
-      pattern = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/;
-      setInvalid(pattern.test(value));
-
-      return pattern.test(value);
-    }
-    if (name === "organizationName") {
-      pattern = /^d+$/;
-
-      setInvalid(pattern.test(value));
-
-      return pattern.test(value);
-    }
-  };
+  const [valid, setValid] = useState<string | boolean>("s");
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   return (
-    <div className={`input ${!invalid && !focused && "invalid"}`}>
+    <div className={`input ${!valid && !focused && "invalid"}`}>
       <label
         className={value || focused ? "label active" : "label"}
         htmlFor={labelText}
@@ -61,15 +31,17 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
         value={value}
         onChange={onChange}
         onFocus={() => {
-          setFocused(true);
-          !invalid && regexGenerator(type, name, value);
+          !(name === "organizationName") && setFocused(true);
+          regexGenerator(type, name, setValid, valid, setErrorMsg, value);
         }}
         onBlur={() => {
-          regexGenerator(type, name, value);
+          !(name === "organizationName") &&
+            regexGenerator(type, name, setValid, valid, setErrorMsg, value);
           setFocused(false);
         }}
         // pattern={regexGenerator(type, name, value)}
       />
+      <p className={!valid ? "error-msg err" : "error-msg"}>{errorMsg}</p>
     </div>
   );
 };

@@ -43,7 +43,7 @@ export const RegisterCard = ({
       />
       <Button
         className="btn btn-border-1"
-        onSubmit={handleSubmit}
+        onClick={handleSubmit}
         text="Sign Up"
       />
     </section>
