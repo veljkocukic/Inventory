@@ -15,6 +15,15 @@ router.post('/register', async (req, res) => {
       req.body.password.length >= 7
     ) {
       const { email, username, password } = req.body;
+      const emailCheck = User.findOne({ email });
+      const usernameCheck = User.findOne({ username });
+      if (email) {
+        res.status(400).json('Email already in use');
+        return;
+      } else if (usernameCheck) {
+        res.status(400).json('Email already in use');
+        return;
+      }
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
       const newUser = new User({
@@ -28,7 +37,7 @@ router.post('/register', async (req, res) => {
       const token = jwt.sign({ id: user._id }, process.env.TOKEN_CODE);
       res.status(200).json({ token, user });
     } else {
-      res.status(400).send('Validation failed');
+      res.status(400).json('Validation failed');
     }
   } catch (err) {
     console.log(err);
