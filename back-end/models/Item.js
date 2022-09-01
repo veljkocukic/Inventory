@@ -12,6 +12,7 @@ const ItemSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+      default: '',
     },
     image: {
       type: String,
@@ -24,6 +25,10 @@ const ItemSchema = new mongoose.Schema(
     },
     min: {
       type: Number,
+    },
+    customFields: {
+      type: Array,
+      default: [],
     },
   },
   { timestamps: true }

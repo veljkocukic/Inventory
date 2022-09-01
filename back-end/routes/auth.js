@@ -17,14 +17,14 @@ router.post('/register', async (req, res) => {
       const { email, username, password } = req.body;
       const emailCheck = User.findOne({ email });
       const usernameCheck = User.findOne({ username });
-      let errors = [];
+      let errors = {};
       if (emailCheck) {
-        errors.push({ email: 'Email already in use' });
+        errors.email = 'E-mail already in use';
       }
       if (usernameCheck) {
-        errors.push({ username: 'Username already in use' });
+        errors.username = 'Username already in use';
       }
-      if (errors.length > 0) {
+      if (errors) {
         res.status(400).json(errors);
         return;
       }
@@ -41,7 +41,11 @@ router.post('/register', async (req, res) => {
       const token = jwt.sign({ id: user._id }, process.env.TOKEN_CODE);
       res.status(200).json({ token, user });
     } else {
-      res.status(400).send('Validation failed');
+      let obj = {};
+      req.body.password.length < 1 && (obj.password = 'Invalid password');
+      req.body.password.email < 1 && (obj.email = 'Invalid e-mail');
+      req.body.password.username < 1 && (obj.username = 'Invalid username');
+      res.status(400).json(obj);
     }
   } catch (err) {
     console.log(err);
@@ -58,16 +62,16 @@ router.post('/login', async (req, res) => {
       req.body.password.length >= 7
     ) {
       const { email, password } = req.body;
-      let errors = [];
+      let errors = {};
       const user = await User.findOne({ email });
       if (!user) {
-        errors.push({ email: 'Wrong email' });
+        errors.email = 'Wrong e-mail.';
       }
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
-        errors.push({ password: 'Wrong email' });
+        errors.password = 'Wrong password.';
       }
-      if (errors.length > 0) {
+      if (errors) {
         res.status(400).json(errors);
         return;
       }
@@ -75,6 +79,17 @@ router.post('/login', async (req, res) => {
       const token = jwt.sign({ id: user._id }, process.env.TOKEN_CODE);
       res.status(200).json({ token, user });
     } else {
+      let errors = {};
+
+      {
+        if (!req.body.email || req.body.email.length < 0) {
+          errors.email = 'Invalid e-mail';
+        }
+        if (!req.body.password || req.body.email.password < 0) {
+          errors.email = 'Invalid password';
+        }
+      }
+
       res.status(400).send('Validation failed');
     }
   } catch (err) {

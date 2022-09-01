@@ -13,6 +13,10 @@ const GroupSchema = new mongoose.Schema(
     maxItems: {
       type: Number,
     },
+    customFields: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );
