@@ -9,6 +9,7 @@ import { LoginCard } from "./LoginCard";
 import { RegisterCard } from "./RegisterCard";
 import { Button } from "../../components/Button";
 import { getUserFromLocalStorage } from "../../utils/localStorage";
+import { toast } from "react-toastify";
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,7 +35,9 @@ export const Login = () => {
     const { email, username, password } = inputValues;
 
     if (isMember) {
-      if (!email || !username || !password) return;
+      if (!email || !username || !password) {
+        toast.warning("Please, fill out required fields.");
+      }
       dispatch(registerUser(inputValues));
       setInputValues({
         username: "",
@@ -45,7 +48,10 @@ export const Login = () => {
 
       return;
     }
-    if (!email || !password) return;
+    if (!email || !password) {
+      toast.warning("All fields are required");
+      return;
+    }
     const loginValues = { email, password };
 
     dispatch(loginUser(loginValues));
