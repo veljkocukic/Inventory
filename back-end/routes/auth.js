@@ -81,13 +81,11 @@ router.post('/login', async (req, res) => {
     } else {
       let errors = {};
 
-      {
-        if (!req.body.email || req.body.email.length < 0) {
-          errors.email = 'Invalid e-mail';
-        }
-        if (!req.body.password || req.body.email.password < 0) {
-          errors.email = 'Invalid password';
-        }
+      if (!req.body.email || req.body.email.length < 0) {
+        errors.email = 'Invalid e-mail';
+      }
+      if (!req.body.password || req.body.email.password < 0) {
+        errors.email = 'Invalid password';
       }
 
       res.status(400).send('Validation failed');
