@@ -37,9 +37,9 @@ router.get('/:id', auth, async (req, res) => {
 
 router.patch('/edit/:id', auth, async (req, res) => {
   const request = req.body;
-  delete request.id;
+  delete request._id;
   try {
-    await Group.findByIdAndUpdate({ _id: req.body.id }, { ...request })
+    await Group.findByIdAndUpdate({ _id: req.body._id }, { ...request })
       .then((response) => {
         res.status(200).send(response);
       })

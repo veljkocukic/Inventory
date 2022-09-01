@@ -254,9 +254,7 @@
                   "type": "string"
                 },
                 "items": {
-                  "type": {
-                    "type": "array"
-                  }
+                  "type": "array"
                 },
                 "maxItems": {
                   "type": "number"
@@ -314,6 +312,74 @@
               "type": "object",
               "example": {
                 "response": "createdItemResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/items/edit/:id": {
+      "patch": {
+        "tags": ["Items"],
+        "summary": "Editing single item",
+        "parameters": [
+          {
+            "name": "group",
+            "in": "body",
+            "description": "Editing item",
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "number"
+              },
+              "description": {
+                "type": "string"
+              },
+              "alertAtLow": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "min": {
+                "type": "number"
+              }
+            },
+            "example": {
+              "_id": "fi32ifh29fnf9j2380f832h",
+              "name": "My item",
+              "description": "Description",
+              "image": "item1.jpg",
+              "alertAtLow": 5,
+              "min": 1,
+              "quantity": 7,
+              "max": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "items": {
+                  "type": {
+                    "type": "array"
+                  }
+                },
+                "maxItems": {
+                  "type": "number"
+                }
               }
             }
           }
