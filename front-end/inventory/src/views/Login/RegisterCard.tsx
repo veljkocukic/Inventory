@@ -5,9 +5,7 @@ import { Input } from "../../components/Input";
 export const RegisterCard = ({
   inputValues,
   handleChange,
-  isMember,
   handleSubmit,
-  setIsMember,
 }: any) => {
   return (
     <section className="register-card">

@@ -16,12 +16,12 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   const [focused, setFocused] = useState(false);
   const [valid, setValid] = useState<string | boolean>("s");
   const [errorMsg, setErrorMsg] = useState<string>("");
-  const { errorMsgs } = useSelector((store: any) => store.user);
+  const { backErrorMsgs } = useSelector((store: any) => store.user);
 
   return (
     <div
       className={`input ${
-        ((!valid && !focused) || errorMsgs[name]) && "invalid"
+        ((!valid && !focused) || backErrorMsgs[name]) && "invalid"
       }`}
     >
       <label
@@ -47,8 +47,14 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
         }}
         // pattern={regexGenerator(type, name, value)}
       />
-      <p className={!valid || errorMsgs[name] ? "error-msg err" : "error-msg"}>
-        {errorMsgs[name] ? errorMsgs[name] : errorMsg}
+      <p
+        className={
+          (!valid && !focused) || (backErrorMsgs[name] && !focused)
+            ? "error-msg error-active"
+            : "error-msg"
+        }
+      >
+        {backErrorMsgs[name] ? backErrorMsgs[name] : errorMsg}
       </p>
     </div>
   );

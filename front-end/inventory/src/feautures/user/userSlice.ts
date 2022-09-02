@@ -9,7 +9,7 @@ const initialState = {
     isLoading:false,
     isUserLoading:false,
     userToken:getCookies('usrin'),
-    errorMsgs:{}
+    backErrorMsgs:{}
 }
 
 export interface IUser{
@@ -56,9 +56,22 @@ const userSlice = createSlice({
     name:'user',
     initialState,
      reducers:{
+        handleErrors: (state, { payload }) => {
+            let newErrors:any = {...payload};
+          Object.keys(payload).map((i)=>{
+            if(newErrors[i] === '') {
+                return newErrors[i] = `${i} invalid`
+            } else if( newErrors[i].length > 1) newErrors[i] = ''
+            })
+
+            state.backErrorMsgs = newErrors
+            console.log(newErrors)
+
+            
+          },
 
         clearErrors: (state) => {
-            state.errorMsgs = '';
+            state.backErrorMsgs = '';
           },
      },
      extraReducers:{
@@ -75,7 +88,7 @@ const userSlice = createSlice({
         },
         [registerUser.rejected.type]:(state, { payload })=>{
             state.isLoading = false
-            state.errorMsgs = payload.response.data
+            state.backErrorMsgs = payload.response.data
             
         },
         [loginUser.pending.type]:(state)=>{
@@ -90,9 +103,8 @@ const userSlice = createSlice({
         },
         [loginUser.rejected.type]:(state, {payload})=>{
             state.isLoading = false
-            state.errorMsgs = payload.response.data
 
-            console.log(state.errorMsgs)
+            state.backErrorMsgs = payload.response.data
         },
         [getUser.pending.type]:(state)=>{
             state.isUserLoading = true
@@ -106,7 +118,7 @@ const userSlice = createSlice({
      }
 })
 
-export const { clearErrors } = userSlice.actions;
+export const { clearErrors, handleErrors } = userSlice.actions;
 
 
 export default userSlice.reducer

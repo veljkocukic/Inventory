@@ -56,8 +56,9 @@
     width: 100%;
     opacity: 0;
     bottom: -25%;
+    text-transform: capitalize;
   }
-  .err {
+  .error-active {
     transition: all 0.5s ease;
     opacity: 1;
   }
@@ -65,4 +66,5 @@
 .invalid {
   animation: shake 0.5s;
   transition: all 0.5s ease;
+  text-transform: capitalize;
 }

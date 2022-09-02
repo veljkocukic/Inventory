@@ -1,13 +1,7 @@
 import React from "react";
 import { Input } from "../../components/Input";
 
-export const LoginCard = ({
-  inputValues,
-  handleChange,
-  isMember,
-  handleSubmit,
-  setIsMember,
-}: any) => {
+export const LoginCard = ({ inputValues, handleChange, handleSubmit }: any) => {
   return (
     <section className="register-card">
       <h2>Welcome to My Storage!</h2>
