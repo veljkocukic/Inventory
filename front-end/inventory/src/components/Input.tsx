@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "../sass/components/_inputs.scss";
-import { regexGenerator } from "../views/Login/loginFuncs";
+import { validate } from "../utils/helpers";
 
 interface IInput {
   labelText: string;
@@ -14,14 +14,14 @@ interface IInput {
 
 export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   const [focused, setFocused] = useState(false);
-  const [valid, setValid] = useState<string | boolean>("s");
-  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<any>("");
   const { backErrorMsgs } = useSelector((store: any) => store.user);
 
   return (
     <div
       className={`input ${
-        ((!valid && !focused) || backErrorMsgs[name]) && "invalid"
+        ((validate(name, value) && !focused) || backErrorMsgs[name]) &&
+        "invalid"
       }`}
     >
       <label
@@ -38,18 +38,21 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
         onChange={onChange}
         onFocus={() => {
           setFocused(true);
-          regexGenerator(type, name, setValid, valid, setErrorMsg, value);
+          setErrorMsg(validate(name, value));
         }}
         onBlur={() => {
           !(name === "organizationName") &&
-            regexGenerator(type, name, setValid, valid, setErrorMsg, value);
+            // regexGenerator(type, name, setValid, valid, setErrorMsg, value);
+            setErrorMsg(validate(name, value));
+
           setFocused(false);
         }}
         // pattern={regexGenerator(type, name, value)}
       />
       <p
         className={
-          (!valid && !focused) || (backErrorMsgs[name] && !focused)
+          (validate(name, value) && !focused) ||
+          (backErrorMsgs[name] && !focused)
             ? "error-msg error-active"
             : "error-msg"
         }
