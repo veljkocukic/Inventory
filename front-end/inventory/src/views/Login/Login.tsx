@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   clearErrors,
+  handleErrors,
   IUser,
   loginUser,
   registerUser,
@@ -12,7 +13,6 @@ import { AppDispatch } from "../../store";
 import { LoginCard } from "./LoginCard";
 import { RegisterCard } from "./RegisterCard";
 import { Button } from "../../components/Button";
-import { toast } from "react-toastify";
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -41,18 +41,19 @@ export const Login = () => {
     const { email, username, password } = inputValues;
 
     if (isMember) {
-      // if (!email || !username || !password) {
-      //   toast.warning("Please, fill out required fields.");
-      // }
-      // console.log("first");
+      if (!email || !username || !password) {
+        dispatch(handleErrors({ email, username, password }));
+        return;
+      }
       dispatch(registerUser(inputValues));
 
       return;
     }
-    // if (!email || !password) {
-    //   toast.warning("All fields are required");
-    //   return;
-    // }
+    if (!email || !password) {
+      dispatch(handleErrors({ email, password }));
+      return;
+    }
+
     const loginValues = { email, password };
 
     dispatch(loginUser(loginValues));
