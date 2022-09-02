@@ -20,18 +20,20 @@ router.post('/register', async (req, res) => {
       const orgCheck = await User.findOne({ organizationName });
       let errors = {};
       if (emailCheck) {
-        errors.email = 'E-mail already in use';
-      }
-      if (usernameCheck) {
-        errors.username = 'Username already in use';
-      }
-      if (orgCheck) {
-        errors.organizationName = 'Organization name already taken';
-      }
-      if (Object.keys(errors).length > 0) {
-        res.status(400).send(errors);
+        res.status(400).json({ email: 'E-mail already in use.' });
         return;
       }
+      if (usernameCheck) {
+        res.status(400).json({ username: 'Username already in use.' });
+        return;
+      }
+      if (orgCheck) {
+        res
+          .status(400)
+          .json({ organizationName: 'Organization name already taken.' });
+        return;
+      }
+
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
       const newUser = new User({
@@ -75,14 +77,12 @@ router.post('/login', async (req, res) => {
       let errors = {};
       const user = await User.findOne({ email });
       if (!user) {
-        errors.email = 'Wrong e-mail.';
+        res.status(400).json({ email: 'Wrong e-mail.' });
+        return;
       }
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
-        errors.password = 'Wrong password.';
-      }
-      if (Object.keys(errors).length > 0) {
-        res.status(400).json(errors);
+        res.status(400).json({ password: 'Wrong password' });
         return;
       }
       delete user.password;
