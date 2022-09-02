@@ -41,10 +41,10 @@ export const Login = () => {
     const { email, username, password } = inputValues;
 
     if (isMember) {
-      if (!email || !username || !password) {
-        toast.warning("Please, fill out required fields.");
-      }
-      console.log("first");
+      // if (!email || !username || !password) {
+      //   toast.warning("Please, fill out required fields.");
+      // }
+      // console.log("first");
       dispatch(registerUser(inputValues));
 
       return;
@@ -66,6 +66,7 @@ export const Login = () => {
       password: "",
       organizationName: "",
     });
+    dispatch(clearErrors());
     setIsMember(!isMember);
   };
 

@@ -17,11 +17,12 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   const [valid, setValid] = useState<string | boolean>("s");
   const [errorMsg, setErrorMsg] = useState<string>("");
   const { errorMsgs } = useSelector((store: any) => store.user);
-  console.log(errorMsgs[name]);
 
   return (
     <div
-      className={`input ${(!valid && !focused) || (errorMsgs && "invalid")}`}
+      className={`input ${
+        ((!valid && !focused) || errorMsgs[name]) && "invalid"
+      }`}
     >
       <label
         className={value || focused ? "label active" : "label"}
