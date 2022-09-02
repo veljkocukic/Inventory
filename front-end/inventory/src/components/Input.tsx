@@ -49,7 +49,9 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
       />
       <p
         className={
-          !valid || backErrorMsgs[name] ? "error-msg error-active" : "error-msg"
+          (!valid && !focused) || (backErrorMsgs[name] && !focused)
+            ? "error-msg error-active"
+            : "error-msg"
         }
       >
         {backErrorMsgs[name] ? backErrorMsgs[name] : errorMsg}

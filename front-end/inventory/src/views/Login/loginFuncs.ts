@@ -17,7 +17,7 @@ export const regexGenerator = (type: string, name: string, setValid:any, valid:a
       return pattern.test(value);
     }
     if (type === "password") {
-      pattern = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/;
+      pattern = /^([A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]{7,})*$/;
       setValid(pattern.test(value));
       !valid && setErrorMsg("Passoword must contain at least 7 characters,");
 
