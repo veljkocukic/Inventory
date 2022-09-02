@@ -16,6 +16,7 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   const [focused, setFocused] = useState(false);
   const [errorMsg, setErrorMsg] = useState<any>("");
   const { backErrorMsgs } = useSelector((store: any) => store.user);
+  console.log(errorMsg);
 
   return (
     <div

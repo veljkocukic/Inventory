@@ -45,6 +45,8 @@ export const validateInput = (name?:any,value?:any) => {
             } 
             
             })
+
+            // validation IF property contains a string error
             newErrors.valid = (Object.values(newErrors).every((v: any) => v.length < 1))
 
             return newErrors

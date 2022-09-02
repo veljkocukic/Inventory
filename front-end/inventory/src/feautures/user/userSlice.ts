@@ -11,7 +11,6 @@ const initialState = {
     isUserLoading:false,
     userToken:getCookies('usrin'),
     backErrorMsgs:{},
-    valid: false,
 }
 
 export interface IUser{
@@ -60,7 +59,6 @@ const userSlice = createSlice({
      reducers:{
         handleErrors: (state, { payload }) => {
           let  newErrors = validateInput({...payload})
-            state.valid = newErrors.valid
           state.backErrorMsgs = newErrors
 
 

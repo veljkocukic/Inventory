@@ -19,7 +19,6 @@ export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [isMember, setIsMember] = useState(false);
-  const { valid } = useSelector((store: any) => store.user);
 
   const [inputValues, setInputValues] = useState<IUser>({
     username: "",
@@ -45,6 +44,7 @@ export const Login = () => {
     //  REGISTER
     if (isMember) {
       dispatch(handleErrors({ email, username, password }));
+      console.log(validateInput({ email, password, username }));
 
       if (validateInput({ email, password, username }).valid) {
         dispatch(registerUser(inputValues));
