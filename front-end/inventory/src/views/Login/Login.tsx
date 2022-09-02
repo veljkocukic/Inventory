@@ -13,11 +13,13 @@ import { AppDispatch } from "../../store";
 import { LoginCard } from "./LoginCard";
 import { RegisterCard } from "./RegisterCard";
 import { Button } from "../../components/Button";
+import { validateInput } from "../../utils/helpers";
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [isMember, setIsMember] = useState(false);
+  const { valid } = useSelector((store: any) => store.user);
 
   const [inputValues, setInputValues] = useState<IUser>({
     username: "",
@@ -29,6 +31,7 @@ export const Login = () => {
   const { userToken } = useSelector((store: any) => store.user);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(clearErrors());
+
     setInputValues((prev) => {
       const copy = { ...prev };
       return { ...copy, [e.target.name]: e.target.value };
@@ -39,25 +42,24 @@ export const Login = () => {
     e.preventDefault();
 
     const { email, username, password } = inputValues;
-
+    //  REGISTER
     if (isMember) {
-      if (!email || !username || !password) {
-        dispatch(handleErrors({ email, username, password }));
+      dispatch(handleErrors({ email, username, password }));
+
+      if (validateInput({ email, password, username }).valid) {
+        dispatch(registerUser(inputValues));
         return;
       }
-      dispatch(registerUser(inputValues));
-
-      return;
     }
-    if (!email || !password) {
+    //  LOGIN
+    if (!isMember) {
       dispatch(handleErrors({ email, password }));
-      return;
+
+      if (validateInput({ email, password }).valid) {
+        const loginValues = { email, password };
+        dispatch(loginUser(loginValues));
+      }
     }
-
-    const loginValues = { email, password };
-
-    dispatch(loginUser(loginValues));
-    navigate("/");
   };
 
   const changeSlide = () => {

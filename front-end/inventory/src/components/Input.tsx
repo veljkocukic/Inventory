@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "../sass/components/_inputs.scss";
-import { validate } from "../utils/helpers";
+import { validateInput } from "../utils/helpers";
 
 interface IInput {
   labelText: string;
@@ -20,8 +20,7 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   return (
     <div
       className={`input ${
-        ((validate(name, value) && !focused) || backErrorMsgs[name]) &&
-        "invalid"
+        ((errorMsg && !focused) || backErrorMsgs[name]) && "invalid"
       }`}
     >
       <label
@@ -38,12 +37,12 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
         onChange={onChange}
         onFocus={() => {
           setFocused(true);
-          setErrorMsg(validate(name, value));
+          setErrorMsg(validateInput(name, value));
         }}
         onBlur={() => {
           !(name === "organizationName") &&
             // regexGenerator(type, name, setValid, valid, setErrorMsg, value);
-            setErrorMsg(validate(name, value));
+            setErrorMsg(validateInput(name, value));
 
           setFocused(false);
         }}
@@ -51,7 +50,7 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
       />
       <p
         className={
-          (validate(name, value) && !focused) ||
+          (validateInput(name, value) && !focused) ||
           (backErrorMsgs[name] && !focused)
             ? "error-msg error-active"
             : "error-msg"

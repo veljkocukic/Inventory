@@ -4,12 +4,14 @@ import customFetch from "../../utils/axios";
 import getCookies from "../../utils/cookies/getCookies";
 import removeCookies from "../../utils/cookies/RemoveCookies";
 import setCookies from "../../utils/cookies/setCookie";
+import { validateInput } from '../../utils/helpers';
 
 const initialState = {
     isLoading:false,
     isUserLoading:false,
     userToken:getCookies('usrin'),
-    backErrorMsgs:{}
+    backErrorMsgs:{},
+    valid: false,
 }
 
 export interface IUser{
@@ -57,22 +59,18 @@ const userSlice = createSlice({
     initialState,
      reducers:{
         handleErrors: (state, { payload }) => {
-            let newErrors:any = {...payload};
-          Object.keys(payload).map((i)=>{
-            if(newErrors[i] === '') {
-                return newErrors[i] = `${i} invalid`
-            } else if( newErrors[i].length > 1) newErrors[i] = ''
-            })
+          let  newErrors = validateInput({...payload})
+            state.valid = newErrors.valid
+          state.backErrorMsgs = newErrors
 
-            state.backErrorMsgs = newErrors
-            console.log(newErrors)
 
-            
+
           },
 
         clearErrors: (state) => {
             state.backErrorMsgs = '';
           },
+          
      },
      extraReducers:{
         [registerUser.pending.type]:(state)=>{
