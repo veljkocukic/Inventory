@@ -15,8 +15,8 @@ router.post('/register', async (req, res) => {
       req.body.password.length >= 7
     ) {
       const { email, username, password } = req.body;
-      const emailCheck = User.findOne({ email });
-      const usernameCheck = User.findOne({ username });
+      const emailCheck = await User.findOne({ email });
+      const usernameCheck = await User.findOne({ username });
       let errors = {};
       if (emailCheck) {
         errors.email = 'E-mail already in use';
@@ -24,8 +24,8 @@ router.post('/register', async (req, res) => {
       if (usernameCheck) {
         errors.username = 'Username already in use';
       }
-      if (errors) {
-        res.status(400).json(errors);
+      if (Object.keys(errors).length > 0) {
+        res.status(400).send(errors);
         return;
       }
       const salt = await bcrypt.genSalt(10);
@@ -42,9 +42,15 @@ router.post('/register', async (req, res) => {
       res.status(200).json({ token, user });
     } else {
       let obj = {};
-      req.body.password.length < 1 && (obj.password = 'Invalid password');
-      req.body.password.email < 1 && (obj.email = 'Invalid e-mail');
-      req.body.password.username < 1 && (obj.username = 'Invalid username');
+      if (req.body.password.length < 1) {
+        obj.password = 'Invalid password';
+      }
+      if (req.body.email.length < 1) {
+        obj.email = 'Invalid e-mail';
+      }
+      if (req.body.username.length < 1) {
+        obj.username = 'Invalid username';
+      }
       res.status(400).json(obj);
     }
   } catch (err) {
@@ -71,7 +77,7 @@ router.post('/login', async (req, res) => {
       if (!validPassword) {
         errors.password = 'Wrong password.';
       }
-      if (errors) {
+      if (Object.keys(errors).length > 0) {
         res.status(400).json(errors);
         return;
       }
@@ -84,11 +90,10 @@ router.post('/login', async (req, res) => {
       if (!req.body.email || req.body.email.length < 0) {
         errors.email = 'Invalid e-mail';
       }
-      if (!req.body.password || req.body.email.password < 0) {
-        errors.email = 'Invalid password';
+      if (!req.body.password || req.body.email.password) {
+        errors.password = 'Invalid password';
       }
-
-      res.status(400).send('Validation failed');
+      res.status(400).json(errors);
     }
   } catch (err) {
     console.log(err);
