@@ -14,15 +14,19 @@ router.post('/register', async (req, res) => {
       req.body.username.length >= 7 &&
       req.body.password.length >= 7
     ) {
-      const { email, username, password } = req.body;
+      const { email, username, password, organizationName } = req.body;
       const emailCheck = await User.findOne({ email });
       const usernameCheck = await User.findOne({ username });
+      const orgCheck = await User.findOne({ organizationName });
       let errors = {};
       if (emailCheck) {
         errors.email = 'E-mail already in use';
       }
       if (usernameCheck) {
         errors.username = 'Username already in use';
+      }
+      if (orgCheck) {
+        errors.organizationName = 'Organization name already taken';
       }
       if (Object.keys(errors).length > 0) {
         res.status(400).send(errors);
