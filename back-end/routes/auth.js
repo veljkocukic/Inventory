@@ -94,7 +94,7 @@ router.post('/login', async (req, res) => {
       if (!req.body.email || req.body.email.length < 0) {
         errors.email = 'Invalid e-mail';
       }
-      if (!req.body.password || req.body.email.password) {
+      if (!req.body.password || req.body.password < 0) {
         errors.password = 'Invalid password';
       }
       res.status(400).json(errors);
