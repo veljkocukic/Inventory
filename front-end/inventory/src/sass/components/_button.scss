@@ -9,7 +9,7 @@
   font-size: 16px;
   letter-spacing: 1px;
   text-decoration: none;
-  color: base.$primary-gray;
+  color: base.$primary-color;
   background: #ffffff;
   border: 3px solid base.$secondary-gray;
   cursor: pointer;
@@ -30,22 +30,22 @@
 .btn.btn-border-1::after {
   bottom: -3px;
   right: -3px;
-  border-left: 3px solid base.$primary-gray;
-  border-bottom: 3px solid base.$primary-gray;
+  border-left: 3px solid base.$primary-color;
+  border-bottom: 3px solid base.$primary-color;
   transition: width 0.1s ease 0.1s, height 0.1s ease, visibility 0s 0.2s;
 }
 
 .btn.btn-border-1::before {
   top: -3px;
   left: -3px;
-  border-top: 3px solid base.$primary-gray;
-  border-right: 3px solid base.$primary-gray;
+  border-top: 3px solid base.$primary-color;
+  border-right: 3px solid base.$primary-color;
   transition: width 0.1s ease 0.3s, height 0.1s ease 0.2s, visibility 0s 0.4s;
 }
 
 .btn.btn-border-1:hover {
   animation: pulse 1s ease-out 0.4s;
-  color: base.$primary-gray;
+  color: base.$primary-color;
 }
 
 .btn.btn-border-1:hover::after,

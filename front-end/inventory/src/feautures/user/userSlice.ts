@@ -1,8 +1,7 @@
 import { addUserLocalStorage } from './../../utils/localStorage';
-import { createSlice,createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../../utils/axios";
 import getCookies from "../../utils/cookies/getCookies";
-import removeCookies from "../../utils/cookies/RemoveCookies";
 import setCookies from "../../utils/cookies/setCookie";
 import { validateInput } from '../../utils/helpers';
 
@@ -21,7 +20,6 @@ export interface IUser{
 }
 
 export const registerUser = createAsyncThunk('user/registerUser', async(user:IUser,thunkApi)=>{
-
     try {
         const resp = await customFetch.post('/auth/register', user);
 
@@ -43,13 +41,11 @@ export const loginUser = createAsyncThunk('user/loginUser', async(user:{email:st
 
 export const getUser = createAsyncThunk('/user/getUser', async(id:string,thunkApi)=>{
     try {
-
         const resp = await customFetch.get('/auth/' + id)
-
-        return resp.data
-        
+     
+        return resp.data 
     } catch (error) {
-        
+        return thunkApi.rejectWithValue(error)
     }
 })
 
@@ -59,10 +55,8 @@ const userSlice = createSlice({
      reducers:{
         handleErrors: (state, { payload }) => {
           let  newErrors = validateInput({...payload})
+
           state.backErrorMsgs = newErrors
-
-
-
           },
 
         clearErrors: (state) => {
@@ -73,6 +67,7 @@ const userSlice = createSlice({
      extraReducers:{
         [registerUser.pending.type]:(state)=>{
             state.isLoading = true
+       
         },
         [registerUser.fulfilled.type]:(state,{ payload })=>{
             state.isLoading = false;
@@ -84,8 +79,8 @@ const userSlice = createSlice({
         },
         [registerUser.rejected.type]:(state, { payload })=>{
             state.isLoading = false
+
             state.backErrorMsgs = payload.response.data
-            
         },
         [loginUser.pending.type]:(state)=>{
             state.isLoading = true

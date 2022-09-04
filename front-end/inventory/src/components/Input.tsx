@@ -16,12 +16,12 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
   const [focused, setFocused] = useState(false);
   const [errorMsg, setErrorMsg] = useState<any>("");
   const { backErrorMsgs } = useSelector((store: any) => store.user);
-  console.log(errorMsg);
 
   return (
     <div
       className={`input ${
-        ((errorMsg && !focused) || backErrorMsgs[name]) && "invalid"
+        ((errorMsg && !focused) || (!focused && backErrorMsgs[name])) &&
+        "invalid"
       }`}
     >
       <label
@@ -42,12 +42,9 @@ export const Input = ({ labelText, value, type, onChange, name }: IInput) => {
         }}
         onBlur={() => {
           !(name === "organizationName") &&
-            // regexGenerator(type, name, setValid, valid, setErrorMsg, value);
             setErrorMsg(validateInput(name, value));
-
           setFocused(false);
         }}
-        // pattern={regexGenerator(type, name, value)}
       />
       <p
         className={

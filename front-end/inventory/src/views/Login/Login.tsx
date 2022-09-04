@@ -44,7 +44,6 @@ export const Login = () => {
     //  REGISTER
     if (isMember) {
       dispatch(handleErrors({ email, username, password }));
-      console.log(validateInput({ email, password, username }));
 
       if (validateInput({ email, password, username }).valid) {
         dispatch(registerUser(inputValues));
