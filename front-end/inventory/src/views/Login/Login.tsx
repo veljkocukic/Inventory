@@ -26,8 +26,8 @@ export const Login = () => {
     password: "",
     organizationName: "",
   });
-
   const { userToken } = useSelector((store: any) => store.user);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(clearErrors());
 

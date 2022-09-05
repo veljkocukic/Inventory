@@ -7,7 +7,6 @@
   position: fixed;
   top: 0px;
   right: 0;
-  bottom: 5px;
 
   padding: 1rem;
   background-color: base.$dash-backround;
@@ -16,4 +15,13 @@
   z-index: 100;
   border-radius: 45px 0px 0px 45px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
+}
+.views-container {
+  position: fixed;
+  top: 10%;
+  width: calc(100vw - 15%);
+  height: 100vh;
+  h2 {
+    text-transform: capitalize;
+  }
 }

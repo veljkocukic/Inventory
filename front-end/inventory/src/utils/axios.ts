@@ -8,8 +8,10 @@ const customFetch = axios.create({
   });
   
   customFetch.interceptors.request.use(
-    (config:any) => {
-    const user = getCookies('usrin')
+    async(config:any) => {
+
+      const user = await getCookies('usrin')
+
 
     if (user) {
         config.headers.common["Authorization"] = `Bearer ${user}`;

@@ -2,11 +2,18 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Slide, ToastContainer } from "react-toastify";
 import { Loading } from "./components/Loading";
-import { SharedLayout, Home, Login, Error, Favorites } from "./views";
-import { Groups } from "./views/Groups";
-import { ProtectedRoute } from "./views/ProtectedRoute";
-import { Settings } from "./views/Settings";
+import {
+  SharedLayout,
+  Home,
+  Login,
+  Error,
+  Favorites,
+  Settings,
+  Groups,
+  ProtectedRoute,
+} from "./views";
 import "react-toastify/dist/ReactToastify.css";
+import { UserSettings } from "./views/Settings/UserSettings";
 
 function App() {
   return (
@@ -25,7 +32,9 @@ function App() {
             <Route index element={<Home />} />
             <Route path="groups" element={<Groups />} />
             <Route path="favorites" element={<Favorites />} />
-            <Route path="settings" element={<Settings />} />
+            <Route path="settings" element={<Settings />}>
+              <Route index element={<UserSettings />} />
+            </Route>
 
             <Route path="*" element={<Error />} />
           </Route>

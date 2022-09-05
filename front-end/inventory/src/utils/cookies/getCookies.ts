@@ -1,7 +1,17 @@
 import Cookies from 'js-cookie';
 
 const getCookies = (cookiename:any)=>{
-    return Cookies.get(cookiename)
+
+try {
+    const cookies:any =  Cookies.get(cookiename)
+    const resp = JSON.parse(cookies)
+    console.log(resp)
+    return resp
+    
+} catch (error) {
+    return null
+}
+
 }
 
 export default getCookies;

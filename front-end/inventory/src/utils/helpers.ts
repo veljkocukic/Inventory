@@ -35,6 +35,7 @@ export const validateInput = (name?:any,value?:any) => {
             }          
             })
             // IF there is any error
+            console.log(newErrors)
             newErrors.valid = (Object.values(newErrors).every((v: any) => v.length < 1))
             return newErrors
     }

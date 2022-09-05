@@ -14,6 +14,7 @@
     height: 90%;
     border-radius: 5px;
     z-index: 2;
+    font-weight: 500;
   }
 
   @keyframes shake {
@@ -31,12 +32,13 @@
   .label {
     z-index: 999;
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 0.5rem;
     border-radius: 2px;
     transform: translateY(40%);
     color: black;
     font-size: 1rem;
+    font-weight: 500;
     pointer-events: none;
     padding: 0 0.3rem;
     transition: 0.2s ease top, 0.2s ease font-size, 0.2s ease color;
