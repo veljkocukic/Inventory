@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import {
   clearErrors,
   editUser,
+  getUser,
   handleErrors,
   IUser,
 } from "../../feautures/user/userSlice";
@@ -14,11 +15,11 @@ import { getUserFromLocalStorage } from "../../utils/localStorage";
 
 export const UserSettings = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { email, password, username, _id } = getUserFromLocalStorage();
+  const { email, username, _id } = getUserFromLocalStorage();
 
   const [inputValues, setInputValues] = useState({
     email,
-    password,
+    password: "",
     username,
     _id,
   });
@@ -36,14 +37,15 @@ export const UserSettings = () => {
     e.preventDefault();
 
     //  check for errors
-    const {} = inputValues;
+    const { email, password, username } = inputValues;
 
     const checkForErrors = { email, password, username };
 
     dispatch(handleErrors(checkForErrors));
-
+    console.log(checkForErrors);
     if (validateInput(checkForErrors).valid) {
       dispatch(editUser(inputValues));
+
       return;
     }
   };

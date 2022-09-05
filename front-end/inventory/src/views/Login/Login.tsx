@@ -14,11 +14,13 @@ import { LoginCard } from "./LoginCard";
 import { RegisterCard } from "./RegisterCard";
 import { Button } from "../../components/Button";
 import { validateInput } from "../../utils/helpers";
+import getCookies from "../../utils/cookies/getCookies";
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [isMember, setIsMember] = useState(false);
+  const { userToken } = useSelector((store: any) => store.user);
 
   const [inputValues, setInputValues] = useState<IUser>({
     username: "",
@@ -26,7 +28,6 @@ export const Login = () => {
     password: "",
     organizationName: "",
   });
-  const { userToken } = useSelector((store: any) => store.user);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(clearErrors());

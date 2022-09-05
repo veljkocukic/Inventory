@@ -42,7 +42,7 @@ export const loginUser = createAsyncThunk('user/loginUser', async(user:{email:st
     }
 })
 
-export const getUser = createAsyncThunk('/user/getUser', async(id:string,thunkApi)=>{
+export const getUser = createAsyncThunk('/user/getUser', async(id:any,thunkApi)=>{
     try {
         const resp = await customFetch.get('/auth/' + id)
      
@@ -56,7 +56,9 @@ export const editUser = createAsyncThunk('user/editUser', async(user:IUser, thun
     console.log(user)
     try {
         const resp = await customFetch.patch('/auth/edit/' + user._id, user)
-console.log('first')
+
+        thunkApi.dispatch(getUser(user._id))
+
         return resp.data
     } catch (error) {
         return thunkApi.rejectWithValue(error)
@@ -116,6 +118,7 @@ const userSlice = createSlice({
         },
         [getUser.fulfilled.type]:(state,{ payload })=>{
             state.isUserLoading = false
+            state.user = payload
         },
         [getUser.rejected.type]:(state)=>{
             state.isUserLoading = false
@@ -124,11 +127,10 @@ const userSlice = createSlice({
             state.isLoading = true;
 
         },
-        [editUser.fulfilled.type]:(state, payload)=>{
+        [editUser.fulfilled.type]:(state, {payload})=>{
             removeUserFromLocalStorage()
             state.isLoading = false;
-            addUserLocalStorage(payload.payload)
-            console.log(payload)
+            addUserLocalStorage(payload)
 
             toast.success('User profile updated')
         },

@@ -4,8 +4,9 @@ import "../sass/components/_loading.scss";
 
 export const Loading = () => {
   const userLoading = useSelector((store: any) => store.user.isLoading);
+  const logedUser = useSelector((store: any) => store.user.isUserLoading);
 
-  const condition = userLoading;
+  const condition = userLoading || logedUser;
 
   return (
     <div className={condition ? "loading-wrapper active" : "loading-wrapper"}>
