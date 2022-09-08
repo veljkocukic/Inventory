@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const checkMail = require('../helpers');
 const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 
 router.post('/register', async (req, res) => {
   try {
@@ -143,6 +144,21 @@ router.patch('/edit/:id', async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
+  }
+});
+
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.TOKEN_CODE);
+    if (token !== decodedToken) {
+      res.status(400).send('You have no permission to delete this user.');
+      return;
+    }
+    await User.findOneAndDelete({ _id: req.params.id });
+    res.status(200).send('User successfully deleted.');
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 
