@@ -18,7 +18,6 @@ router.post('/register', async (req, res) => {
       const emailCheck = await User.findOne({ email });
       const usernameCheck = await User.findOne({ username });
       const orgCheck = await User.findOne({ organizationName });
-      let errors = {};
       if (emailCheck) {
         res.status(400).json({ email: 'E-mail already in use.' });
         return;
@@ -74,7 +73,6 @@ router.post('/login', async (req, res) => {
       req.body.password.length >= 7
     ) {
       const { email, password } = req.body;
-      let errors = {};
       const user = await User.findOne({ email });
       if (!user) {
         res.status(400).json({ email: 'Wrong e-mail.' });
@@ -135,13 +133,13 @@ router.patch('/edit/:id', async (req, res) => {
     const request = req.body;
     const hashedPassword = await bcrypt.hash(request.password, salt);
     request.password = hashedPassword;
-    await User.findByIdAndUpdate({ _id: user._id }, { ...request })
-      .then((resp) => {
-        res.status(200).send(resp);
-      })
-      .catch((error) => {
-        res.status(500).send(error);
-      });
+    const query = User.findOneAndUpdate(
+      { _id: user._id.toString() },
+      { ...request }
+    );
+
+    await query.clone();
+    res.status(200).json(query._update);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
