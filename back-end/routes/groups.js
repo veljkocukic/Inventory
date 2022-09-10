@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Group = require('../models/Group');
 const auth = require('../middleware/auth');
-const { response } = require('express');
+const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
 router.post('/', auth, async (req, res) => {
   try {
@@ -48,6 +49,25 @@ router.patch('/edit/:id', auth, async (req, res) => {
       });
   } catch (error) {
     res.status(500).json(err);
+  }
+});
+
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.TOKEN_CODE);
+
+    const foundUser = await User.findOne({ _id: decodedToken });
+    if (foundUser.groups.contains(req.params.id)) {
+      await Group.findOneAndDelete({ _id: req.body.id });
+      res.status(200).send('Group successsfully deleted');
+      return;
+    } else {
+      res.status(400).send('You have no permission to delete this group');
+      return;
+    }
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 
