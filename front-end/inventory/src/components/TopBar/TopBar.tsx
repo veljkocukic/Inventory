@@ -1,18 +1,28 @@
-import React from "react";
-import { searchIcon } from "../../assets/icons/searchIcon";
-import "../../sass/main.scss";
-import { Button } from "../Button";
-import { IconButton } from "../IconButton/IconButton";
-import { SearchBox } from "../SearchBox/SearchBox";
-
+import React from 'react';
+import '../../sass/main.scss';
+import { DotsNine } from 'phosphor-react';
+import { Leaf, CaretDown } from 'phosphor-react';
 export const TopBar = () => {
   return (
-    <div className="top-bar-container">
-      <h1 className="top-bar-title">Overview</h1>
-      <SearchBox />
-      <div className="top-bar-buttons">
-        <IconButton icon={searchIcon} />
-        <Button className="top-bar-btn" text="Upgrade Plan" />
+    <div className='top-bar-container'>
+      <div className='top-bar-left'>
+        <DotsNine size={35} weight='bold' />
+      </div>
+      <div className='top-bar-logo'>
+        <Leaf size={32} />
+        <h2>AgroPilot</h2>
+      </div>
+      <div className='top-bar-user'>
+        <div className='text-image-container'>
+          <img src='https://placekitten.com/200/300' alt='user' />
+          <div className='user-info'>
+            <p className='user-name'>Don Jone</p>
+            <p className='user-sub-text'>Placegolder</p>
+          </div>
+        </div>
+        <div className='green-circle'>
+          <CaretDown size={15} color={'white'} weight='bold' />
+        </div>
       </div>
     </div>
   );

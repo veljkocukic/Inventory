@@ -1,17 +1,16 @@
 @use "../base";
 
 aside {
-  position: fixed;
   top: 0;
   left: 0;
   min-height: 100vh;
-  background: linear-gradient(
-    to top,
-    base.$primary-dark-gray,
-    base.$primary-color
-  );
-  width: 20%;
-  z-index: 99;
+  background: base.$dark-green;
+  min-width: 250px;
+  z-index: 999999999;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5rem;
 }
 .sidebar-container {
   user-select: none;
@@ -27,6 +26,10 @@ aside {
       width: 2.5rem;
       height: 2.5rem;
     }
+  }
+
+  .white{
+    color:white
   }
 
   h2 {
@@ -52,8 +55,11 @@ aside {
   }
   .link {
     text-decoration: none;
-    color: base.$secondary-gray;
+    color: base.$pale-green;
     transition: all 0.5s ease-in-out;
+    *{
+      fill: base.$pale-green;
+    }
   }
   .active {
     color: base.$dash-backround;

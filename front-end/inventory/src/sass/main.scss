@@ -14,3 +14,21 @@
   overscroll-behavior: none;
   font-family: base.$font-family;
 }
+
+
+.green-circle{
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+  background-color: base.$light-green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .3s ease;
+
+  &:hover{
+    background-color: base.$dark-green;
+    
+  }
+}

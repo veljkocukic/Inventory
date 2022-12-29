@@ -1,18 +1,109 @@
+@use "../base";
+
 .top-bar-container{
-    position: absolute;
-    width: 95%;
-    height: 4rem;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    height: 5rem;
     left:50%;
     transform: translateX(-50%);
-    border-radius: 10px;
-    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 9999999990;
 }
 
 .top-bar-buttons{
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.top-bar-left{
+    min-width: 250px;
+    height: 100%;
+    background-color: base.$pale-green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg{
+        fill:white;
+        color:white;
+    }
+}
+
+.top-bar-logo{
+    color: base.$light-green;
+    width: max-content;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+    width: 100%;
+    margin-right: 250px;
+
+}
+
+.top-bar-user{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background-color: base.$base-gray;
+    border-top-left-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+
+    .text-image-container{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem; 
+        gap:1rem;
+
+        .user-info{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+
+            .user-name{
+                color: base.$dark-green;
+                font-weight: 600;
+                font-size: .9rem;
+            }
+
+            .user-sub-text{
+                color: base.$darker-gray;
+                font-weight: 500;
+                font-size: .8rem;
+            }
+        }
+
+        img{
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+}
+
+
+.top-bar-time{
+    .time{
+        color: base.$light-green;
+        font-weight: 600;
+    }
+    .date{
+        color: gray;
+        font-weight: 400;
+        font-size: .9rem;
+
+    }
 }
