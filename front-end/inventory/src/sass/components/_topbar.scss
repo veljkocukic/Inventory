@@ -20,12 +20,20 @@
 }
 
 .top-bar-left{
-    min-width: 250px;
+    min-width: 200px;
+    cursor: pointer;
     height: 100%;
     background-color: base.$pale-green;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: .2s ease;
+
+    &:hover{
+    background-color: base.$light-green;
+
+    }
+
     svg{
         fill:white;
         color:white;

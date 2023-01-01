@@ -5,11 +5,11 @@ aside {
   left: 0;
   min-height: 100vh;
   background: base.$dark-green;
-  min-width: 250px;
+  min-width: 200px;
   z-index: 999999999;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding-top: 5rem;
 }
 .sidebar-container {

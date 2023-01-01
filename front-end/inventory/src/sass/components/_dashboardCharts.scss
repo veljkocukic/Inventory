@@ -1,0 +1,45 @@
+@use "../base";
+
+
+.charts-wrapper{
+  @include base.Flex('', center, space-between, 0.3rem);
+  width: 100%;
+  height: 100%;
+}
+
+.single-chart-container{
+    background-color: white;
+    border-radius: 15px;
+    padding: .3rem;
+    @include base.Flex(column, center, space-between, 0.3rem);
+    width: 50%;
+    height: 100%;
+}
+
+.chart-info-section{
+  padding: .1rem;
+  border-top: 1px solid base.$base-gray;
+  @include base.Flex('', center, center, '');
+  height: 50%;
+}
+
+.chart-info-container{
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap:.4rem;
+  justify-items: center
+}
+
+.chart-info{
+  @include base.Flex(column, center, center, .1rem);
+  p{
+    font-size: .6rem;
+  }
+}
+
+.chart-info-color{
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+}

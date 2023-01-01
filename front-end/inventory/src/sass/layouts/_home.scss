@@ -1,0 +1,35 @@
+@use "../base";
+
+
+
+.home-container{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap:.3rem;
+}
+
+.single-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    max-width: 350px;
+    min-width: 300px;
+    min-height: 150px;
+    gap:1rem;
+}
+
+.single-section-top{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    p{
+        color:base.$black;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+}

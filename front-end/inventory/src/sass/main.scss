@@ -2,9 +2,12 @@
 @use "components/topbar.scss";
 @use "components/searchbox.scss";
 @use "components/iconbutton.scss";
+@use "components/dashboardCharts.scss";
+@use "components/singleTaskSection.scss";
 @use "_base.scss";
 @use "layouts/layout";
 @use "layouts/dashboar";
+@use "layouts/home";
 @use "components/button";
 
 * {
@@ -15,6 +18,24 @@
   font-family: base.$font-family;
 }
 
+.page-wrapper{
+  padding: 2rem;
+  padding-top: 7rem;
+  background-color: base.$base-gray;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:2rem;
+
+  h2{
+    color:base.$black;
+    width:100%;
+    text-align: start;
+
+  }
+}
 
 .green-circle{
   width: 25px;
@@ -31,4 +52,28 @@
     background-color: base.$dark-green;
     
   }
+}
+
+.gray-box{
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background-color: base.$button-gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .3s ease;
+
+  &:hover{
+    background-color: base.$pale-green;
+  }
+}
+
+.background-green{
+  background-color: base.$light-green;
+}
+
+.background-red{
+  background-color: base.$red;
 }
